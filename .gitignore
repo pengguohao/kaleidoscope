@@ -1,3 +1,22 @@
+target
+
+# Eclipse, Netbeans and IntelliJ files
+.project
+.classpath
+.settings
+nbproject
+.idea
+*.ipr
+*.iws
+*.iml
+packages/*
+support/generator/*
+# Mac DS_Store files
+.DS_Store
+.flattened-pom.xml
+/log.base.dir_IS_UNDEFINED/
+
+
 # Compiled class file
 *.class
 
