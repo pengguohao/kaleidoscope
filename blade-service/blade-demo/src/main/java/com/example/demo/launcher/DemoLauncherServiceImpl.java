@@ -16,9 +16,9 @@
  */
 package com.example.demo.launcher;
 
-import org.springblade.core.launch.constant.NacosConstant;
-import org.springblade.core.launch.service.LauncherService;
-import org.springblade.core.launch.utils.PropsUtil;
+import com.pgh.kaleidoscope.core.launch.constant.NacosConstant;
+import com.pgh.kaleidoscope.core.launch.service.LauncherService;
+import com.pgh.kaleidoscope.core.launch.utils.PropsUtil;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import java.util.Properties;

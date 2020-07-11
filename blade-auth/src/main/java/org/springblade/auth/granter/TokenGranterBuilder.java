@@ -16,9 +16,9 @@
 package org.springblade.auth.granter;
 
 import lombok.AllArgsConstructor;
-import org.springblade.core.secure.exception.SecureException;
-import org.springblade.core.tool.utils.Func;
-import org.springblade.core.tool.utils.SpringUtil;
+import com.pgh.kaleidoscope.core.secure.exception.SecureException;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.tool.utils.SpringUtil;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

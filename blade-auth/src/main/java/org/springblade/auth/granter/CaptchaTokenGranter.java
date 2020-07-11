@@ -16,13 +16,13 @@
  */
 package org.springblade.auth.granter;
 
+import com.pgh.kaleidoscope.core.tool.utils.*;
 import lombok.AllArgsConstructor;
 import org.springblade.auth.enums.BladeUserEnum;
 import org.springblade.auth.utils.TokenUtil;
 import org.springblade.common.cache.CacheNames;
-import org.springblade.core.log.exception.ServiceException;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.utils.*;
+import com.pgh.kaleidoscope.core.log.exception.ServiceException;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springblade.system.user.entity.UserInfo;
 import org.springblade.system.user.feign.IUserClient;
 import org.springframework.stereotype.Component;
@@ -63,7 +63,7 @@ public class CaptchaTokenGranter implements ITokenGranter {
 		if (Func.isNoneBlank(account, password)) {
 			// 获取用户类型
 			String userType = tokenParameter.getArgs().getStr("userType");
-			R<UserInfo> result;
+			CommonResult<UserInfo> result;
 			// 根据不同用户类型调用对应的接口返回数据，用户可自行拓展
 			if (userType.equals(BladeUserEnum.WEB.getName())) {
 				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));

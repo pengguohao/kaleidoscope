@@ -18,11 +18,11 @@ package org.springblade.resource.endpoint;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.springblade.core.oss.QiniuTemplate;
-import org.springblade.core.oss.model.BladeFile;
-import org.springblade.core.oss.model.OssFile;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.oss.QiniuTemplate;
+import com.pgh.kaleidoscope.core.oss.model.KaleidoscopeFile;
+import com.pgh.kaleidoscope.core.oss.model.OssFile;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,9 +47,9 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@PostMapping("/make-bucket")
-	public R makeBucket(@RequestParam String bucketName) {
+	public CommonResult makeBucket(@RequestParam String bucketName) {
 		qiniuTemplate.makeBucket(bucketName);
-		return R.success("创建成功");
+		return CommonResult.success("创建成功");
 	}
 
 	/**
@@ -60,9 +60,9 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@PostMapping("/remove-bucket")
-	public R removeBucket(@RequestParam String bucketName) {
+	public CommonResult removeBucket(@RequestParam String bucketName) {
 		qiniuTemplate.removeBucket(bucketName);
-		return R.success("删除成功");
+		return CommonResult.success("删除成功");
 	}
 
 	/**
@@ -75,9 +75,9 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@PostMapping("/copy-file")
-	public R copyFile(@RequestParam String fileName, @RequestParam String destBucketName, String destFileName) {
+	public CommonResult copyFile(@RequestParam String fileName, @RequestParam String destBucketName, String destFileName) {
 		qiniuTemplate.copyFile(fileName, destBucketName, destFileName);
-		return R.success("操作成功");
+		return CommonResult.success("操作成功");
 	}
 
 	/**
@@ -88,8 +88,8 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@GetMapping("/stat-file")
-	public R<OssFile> statFile(@RequestParam String fileName) {
-		return R.data(qiniuTemplate.statFile(fileName));
+	public CommonResult<OssFile> statFile(@RequestParam String fileName) {
+		return CommonResult.data(qiniuTemplate.statFile(fileName));
 	}
 
 	/**
@@ -100,8 +100,8 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@GetMapping("/file-path")
-	public R<String> filePath(@RequestParam String fileName) {
-		return R.data(qiniuTemplate.filePath(fileName));
+	public CommonResult<String> filePath(@RequestParam String fileName) {
+		return CommonResult.data(qiniuTemplate.filePath(fileName));
 	}
 
 
@@ -113,8 +113,8 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@GetMapping("/file-link")
-	public R<String> fileLink(@RequestParam String fileName) {
-		return R.data(qiniuTemplate.fileLink(fileName));
+	public CommonResult<String> fileLink(@RequestParam String fileName) {
+		return CommonResult.data(qiniuTemplate.fileLink(fileName));
 	}
 
 	/**
@@ -125,9 +125,9 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@PostMapping("/put-file")
-	public R<BladeFile> putFile(@RequestParam MultipartFile file) {
-		BladeFile bladeFile = qiniuTemplate.putFile(file.getOriginalFilename(), file.getInputStream());
-		return R.data(bladeFile);
+	public CommonResult<KaleidoscopeFile> putFile(@RequestParam MultipartFile file) {
+		KaleidoscopeFile kaleidoscopeFile = qiniuTemplate.putFile(file.getOriginalFilename(), file.getInputStream());
+		return CommonResult.data(kaleidoscopeFile);
 	}
 
 	/**
@@ -139,9 +139,9 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@PostMapping("/put-file-by-name")
-	public R<BladeFile> putFile(@RequestParam String fileName, @RequestParam MultipartFile file) {
-		BladeFile bladeFile = qiniuTemplate.putFile(fileName, file.getInputStream());
-		return R.data(bladeFile);
+	public CommonResult<KaleidoscopeFile> putFile(@RequestParam String fileName, @RequestParam MultipartFile file) {
+		KaleidoscopeFile kaleidoscopeFile = qiniuTemplate.putFile(fileName, file.getInputStream());
+		return CommonResult.data(kaleidoscopeFile);
 	}
 
 	/**
@@ -152,9 +152,9 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@PostMapping("/remove-file")
-	public R removeFile(@RequestParam String fileName) {
+	public CommonResult removeFile(@RequestParam String fileName) {
 		qiniuTemplate.removeFile(fileName);
-		return R.success("操作成功");
+		return CommonResult.success("操作成功");
 	}
 
 	/**
@@ -165,9 +165,9 @@ public class OssEndpoint {
 	 */
 	@SneakyThrows
 	@PostMapping("/remove-files")
-	public R removeFiles(@RequestParam String fileNames) {
+	public CommonResult removeFiles(@RequestParam String fileNames) {
 		qiniuTemplate.removeFiles(Func.toStrList(fileNames));
-		return R.success("操作成功");
+		return CommonResult.success("操作成功");
 	}
 
 }

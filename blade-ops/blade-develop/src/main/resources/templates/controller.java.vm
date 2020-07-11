@@ -22,15 +22,10 @@ import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import javax.validation.Valid;
 
-import org.springblade.core.mp.support.Condition;
-import org.springblade.core.mp.support.Query;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.utils.Func;
 import org.springframework.web.bind.annotation.*;
 #if($!{superEntityClass})
 import org.springframework.web.bind.annotation.RequestParam;
 #end
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import $!{package.Entity}.$!{entity};
 #set($voPackage=$package.Entity.replace("entity","vo"))
 import $!{voPackage}.$!{entity}VO;
@@ -42,7 +37,6 @@ import $!{superControllerClassPackage};
 #end
 #if(!$!{superEntityClass})
 #end
-import java.util.List;
 
 /**
  * $!{table.comment} 控制器

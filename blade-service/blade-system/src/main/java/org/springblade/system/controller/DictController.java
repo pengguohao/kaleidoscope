@@ -18,11 +18,11 @@ package org.springblade.system.controller;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
-import org.springblade.core.boot.ctrl.BladeController;
-import org.springblade.core.mp.support.Condition;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.node.INode;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.boot.controller.BladeController;
+import com.pgh.kaleidoscope.core.mp.support.Condition;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.node.INode;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.entity.Dict;
 import org.springblade.system.service.IDictService;
 import org.springblade.system.vo.DictVO;
@@ -57,9 +57,9 @@ public class DictController extends BladeController {
 	@GetMapping("/detail")
 	@ApiOperationSupport(order = 1)
 	@ApiOperation(value = "详情", notes = "传入dict")
-	public R<DictVO> detail(Dict dict) {
+	public CommonResult<DictVO> detail(Dict dict) {
 		Dict detail = dictService.getOne(Condition.getQueryWrapper(dict));
-		return R.data(DictWrapper.build().entityVO(detail));
+		return CommonResult.data(DictWrapper.build().entityVO(detail));
 	}
 
 	/**
@@ -72,10 +72,10 @@ public class DictController extends BladeController {
 	})
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "列表", notes = "传入dict")
-	public R<List<INode>> list(@ApiIgnore @RequestParam Map<String, Object> dict) {
+	public CommonResult<List<INode>> list(@ApiIgnore @RequestParam Map<String, Object> dict) {
 		@SuppressWarnings("unchecked")
 		List<Dict> list = dictService.list(Condition.getQueryWrapper(dict, Dict.class).lambda().orderByAsc(Dict::getSort));
-		return R.data(DictWrapper.build().listNodeVO(list));
+		return CommonResult.data(DictWrapper.build().listNodeVO(list));
 	}
 
 	/**
@@ -86,9 +86,9 @@ public class DictController extends BladeController {
 	@GetMapping("/tree")
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "树形结构", notes = "树形结构")
-	public R<List<DictVO>> tree() {
+	public CommonResult<List<DictVO>> tree() {
 		List<DictVO> tree = dictService.tree();
-		return R.data(tree);
+		return CommonResult.data(tree);
 	}
 
 	/**
@@ -97,8 +97,8 @@ public class DictController extends BladeController {
 	@PostMapping("/submit")
 	@ApiOperationSupport(order = 4)
 	@ApiOperation(value = "新增或修改", notes = "传入dict")
-	public R submit(@Valid @RequestBody Dict dict) {
-		return R.status(dictService.submit(dict));
+	public CommonResult submit(@Valid @RequestBody Dict dict) {
+		return CommonResult.status(dictService.submit(dict));
 	}
 
 
@@ -109,8 +109,8 @@ public class DictController extends BladeController {
 	@CacheEvict(cacheNames = {DICT_LIST, DICT_VALUE}, allEntries = true)
 	@ApiOperationSupport(order = 5)
 	@ApiOperation(value = "删除", notes = "传入ids")
-	public R remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
-		return R.status(dictService.removeByIds(Func.toLongList(ids)));
+	public CommonResult remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
+		return CommonResult.status(dictService.removeByIds(Func.toLongList(ids)));
 	}
 
 	/**
@@ -121,9 +121,9 @@ public class DictController extends BladeController {
 	@GetMapping("/dictionary")
 	@ApiOperationSupport(order = 6)
 	@ApiOperation(value = "获取字典", notes = "获取字典")
-	public R<List<Dict>> dictionary(String code) {
+	public CommonResult<List<Dict>> dictionary(String code) {
 		List<Dict> tree = dictService.getList(code);
-		return R.data(tree);
+		return CommonResult.data(tree);
 	}
 
 

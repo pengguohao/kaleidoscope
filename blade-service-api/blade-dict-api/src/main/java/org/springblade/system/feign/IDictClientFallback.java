@@ -15,7 +15,7 @@
  */
 package org.springblade.system.feign;
 
-import org.springblade.core.tool.api.R;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springblade.system.entity.Dict;
 import org.springframework.stereotype.Component;
 
@@ -29,12 +29,12 @@ import java.util.List;
 @Component
 public class IDictClientFallback implements IDictClient {
 	@Override
-	public R<String> getValue(String code, Integer dictKey) {
-		return R.fail("获取数据失败");
+	public CommonResult<String> getValue(String code, Integer dictKey) {
+		return CommonResult.fail("获取数据失败");
 	}
 
 	@Override
-	public R<List<Dict>> getList(String code) {
-		return R.fail("获取数据失败");
+	public CommonResult<List<Dict>> getList(String code) {
+		return CommonResult.fail("获取数据失败");
 	}
 }

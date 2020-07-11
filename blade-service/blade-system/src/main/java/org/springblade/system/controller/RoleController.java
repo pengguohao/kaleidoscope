@@ -19,13 +19,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
-import org.springblade.core.boot.ctrl.BladeController;
-import org.springblade.core.mp.support.Condition;
-import org.springblade.core.secure.BladeUser;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.constant.BladeConstant;
-import org.springblade.core.tool.node.INode;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.boot.controller.BladeController;
+import com.pgh.kaleidoscope.core.mp.support.Condition;
+import com.pgh.kaleidoscope.core.secure.KaleidoscopeUser;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.constant.KaleidoscopeConstant;
+import com.pgh.kaleidoscope.core.tool.node.INode;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.entity.Role;
 import org.springblade.system.service.IRoleService;
 import org.springblade.system.vo.RoleVO;
@@ -56,9 +56,9 @@ public class RoleController extends BladeController {
 	@GetMapping("/detail")
 	@ApiOperationSupport(order = 1)
 	@ApiOperation(value = "详情", notes = "传入role")
-	public R<RoleVO> detail(Role role) {
+	public CommonResult<RoleVO> detail(Role role) {
 		Role detail = roleService.getOne(Condition.getQueryWrapper(role));
-		return R.data(RoleWrapper.build().entityVO(detail));
+		return CommonResult.data(RoleWrapper.build().entityVO(detail));
 	}
 
 	/**
@@ -71,10 +71,10 @@ public class RoleController extends BladeController {
 	})
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "列表", notes = "传入role")
-	public R<List<INode>> list(@ApiIgnore @RequestParam Map<String, Object> role, BladeUser bladeUser) {
+	public CommonResult<List<INode>> list(@ApiIgnore @RequestParam Map<String, Object> role, KaleidoscopeUser kaleidoscopeUser) {
 		QueryWrapper<Role> queryWrapper = Condition.getQueryWrapper(role, Role.class);
-		List<Role> list = roleService.list((!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(Role::getTenantId, bladeUser.getTenantId()) : queryWrapper);
-		return R.data(RoleWrapper.build().listNodeVO(list));
+		List<Role> list = roleService.list((!kaleidoscopeUser.getTenantId().equals(KaleidoscopeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(Role::getTenantId, kaleidoscopeUser.getTenantId()) : queryWrapper);
+		return CommonResult.data(RoleWrapper.build().listNodeVO(list));
 	}
 
 	/**
@@ -83,9 +83,9 @@ public class RoleController extends BladeController {
 	@GetMapping("/tree")
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "树形结构", notes = "树形结构")
-	public R<List<RoleVO>> tree(String tenantId, BladeUser bladeUser) {
-		List<RoleVO> tree = roleService.tree(Func.toStr(tenantId, bladeUser.getTenantId()));
-		return R.data(tree);
+	public CommonResult<List<RoleVO>> tree(String tenantId, KaleidoscopeUser kaleidoscopeUser) {
+		List<RoleVO> tree = roleService.tree(Func.toStr(tenantId, kaleidoscopeUser.getTenantId()));
+		return CommonResult.data(tree);
 	}
 
 	/**
@@ -94,11 +94,11 @@ public class RoleController extends BladeController {
 	@PostMapping("/submit")
 	@ApiOperationSupport(order = 4)
 	@ApiOperation(value = "新增或修改", notes = "传入role")
-	public R submit(@Valid @RequestBody Role role, BladeUser user) {
+	public CommonResult submit(@Valid @RequestBody Role role, KaleidoscopeUser user) {
 		if (Func.isEmpty(role.getId())) {
 			role.setTenantId(user.getTenantId());
 		}
-		return R.status(roleService.saveOrUpdate(role));
+		return CommonResult.status(roleService.saveOrUpdate(role));
 	}
 
 
@@ -108,8 +108,8 @@ public class RoleController extends BladeController {
 	@PostMapping("/remove")
 	@ApiOperationSupport(order = 5)
 	@ApiOperation(value = "删除", notes = "传入ids")
-	public R remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
-		return R.status(roleService.removeByIds(Func.toLongList(ids)));
+	public CommonResult remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
+		return CommonResult.status(roleService.removeByIds(Func.toLongList(ids)));
 	}
 
 	/**
@@ -122,10 +122,10 @@ public class RoleController extends BladeController {
 	@PostMapping("/grant")
 	@ApiOperationSupport(order = 6)
 	@ApiOperation(value = "权限设置", notes = "传入roleId集合以及menuId集合")
-	public R grant(@ApiParam(value = "roleId集合", required = true) @RequestParam String roleIds,
-				   @ApiParam(value = "menuId集合", required = true) @RequestParam String menuIds) {
+	public CommonResult grant(@ApiParam(value = "roleId集合", required = true) @RequestParam String roleIds,
+							  @ApiParam(value = "menuId集合", required = true) @RequestParam String menuIds) {
 		boolean temp = roleService.grant(Func.toLongList(roleIds), Func.toLongList(menuIds));
-		return R.status(temp);
+		return CommonResult.status(temp);
 	}
 
 }

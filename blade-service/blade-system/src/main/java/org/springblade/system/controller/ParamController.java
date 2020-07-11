@@ -19,11 +19,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
-import org.springblade.core.boot.ctrl.BladeController;
-import org.springblade.core.mp.support.Condition;
-import org.springblade.core.mp.support.Query;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.boot.controller.BladeController;
+import com.pgh.kaleidoscope.core.mp.support.Condition;
+import com.pgh.kaleidoscope.core.mp.support.Query;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.entity.Param;
 import org.springblade.system.service.IParamService;
 import org.springframework.web.bind.annotation.*;
@@ -51,9 +51,9 @@ public class ParamController extends BladeController {
 	@GetMapping("/detail")
 	@ApiOperationSupport(order = 1)
 	@ApiOperation(value = "详情", notes = "传入param")
-	public R<Param> detail(Param param) {
+	public CommonResult<Param> detail(Param param) {
 		Param detail = paramService.getOne(Condition.getQueryWrapper(param));
-		return R.data(detail);
+		return CommonResult.data(detail);
 	}
 
 	/**
@@ -67,9 +67,9 @@ public class ParamController extends BladeController {
 	})
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "分页", notes = "传入param")
-	public R<IPage<Param>> list(@ApiIgnore @RequestParam Map<String, Object> param, Query query) {
+	public CommonResult<IPage<Param>> list(@ApiIgnore @RequestParam Map<String, Object> param, Query query) {
 		IPage<Param> pages = paramService.page(Condition.getPage(query), Condition.getQueryWrapper(param, Param.class));
-		return R.data(pages);
+		return CommonResult.data(pages);
 	}
 
 	/**
@@ -78,8 +78,8 @@ public class ParamController extends BladeController {
 	@PostMapping("/submit")
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "新增或修改", notes = "传入param")
-	public R submit(@Valid @RequestBody Param param) {
-		return R.status(paramService.saveOrUpdate(param));
+	public CommonResult submit(@Valid @RequestBody Param param) {
+		return CommonResult.status(paramService.saveOrUpdate(param));
 	}
 
 
@@ -89,8 +89,8 @@ public class ParamController extends BladeController {
 	@PostMapping("/remove")
 	@ApiOperationSupport(order = 4)
 	@ApiOperation(value = "逻辑删除", notes = "传入ids")
-	public R remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
-		return R.status(paramService.deleteLogic(Func.toLongList(ids)));
+	public CommonResult remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
+		return CommonResult.status(paramService.deleteLogic(Func.toLongList(ids)));
 	}
 
 

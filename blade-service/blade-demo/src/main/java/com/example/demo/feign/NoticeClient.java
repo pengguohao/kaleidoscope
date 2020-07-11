@@ -19,7 +19,7 @@ package com.example.demo.feign;
 import com.example.demo.entity.Notice;
 import com.example.demo.mapper.NoticeMapper;
 import lombok.AllArgsConstructor;
-import org.springblade.core.tool.api.R;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
@@ -40,8 +40,8 @@ public class NoticeClient implements INoticeClient {
 
 	@Override
 	@GetMapping(TOP)
-	public R<List<Notice>> top(Integer number) {
-		return R.data(mapper.topList(number));
+	public CommonResult<List<Notice>> top(Integer number) {
+		return CommonResult.data(mapper.topList(number));
 	}
 
 }

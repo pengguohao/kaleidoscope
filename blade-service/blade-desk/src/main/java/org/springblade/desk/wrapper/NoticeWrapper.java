@@ -15,10 +15,10 @@
  */
 package org.springblade.desk.wrapper;
 
-import org.springblade.core.mp.support.BaseEntityWrapper;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.utils.BeanUtil;
-import org.springblade.core.tool.utils.SpringUtil;
+import com.pgh.kaleidoscope.core.mp.support.BaseEntityWrapper;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.utils.BeanUtil;
+import com.pgh.kaleidoscope.core.tool.utils.SpringUtil;
 import org.springblade.desk.entity.Notice;
 import org.springblade.desk.vo.NoticeVO;
 import org.springblade.system.feign.IDictClient;
@@ -43,7 +43,7 @@ public class NoticeWrapper extends BaseEntityWrapper<Notice, NoticeVO> {
 	@Override
 	public NoticeVO entityVO(Notice notice) {
 		NoticeVO noticeVO = BeanUtil.copy(notice, NoticeVO.class);
-		R<String> dict = dictClient.getValue("notice", noticeVO.getCategory());
+		CommonResult<String> dict = dictClient.getValue("notice", noticeVO.getCategory());
 		if (dict.isSuccess()) {
 			String categoryName = dict.getData();
 			noticeVO.setCategoryName(categoryName);

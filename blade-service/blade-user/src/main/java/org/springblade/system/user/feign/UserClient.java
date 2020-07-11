@@ -16,8 +16,7 @@
 package org.springblade.system.user.feign;
 
 import lombok.AllArgsConstructor;
-import org.springblade.core.tool.api.R;
-import org.springblade.system.user.entity.User;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springblade.system.user.entity.UserInfo;
 import org.springblade.system.user.service.IUserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,14 +34,14 @@ public class UserClient implements IUserClient {
 	private IUserService service;
 
 	@Override
-	public R<UserInfo> userInfo(Long userId) {
-		return R.data(service.userInfo(userId));
+	public CommonResult<UserInfo> userInfo(Long userId) {
+		return CommonResult.data(service.userInfo(userId));
 	}
 
 	@Override
 	@GetMapping(API_PREFIX + "/user-info")
-	public R<UserInfo> userInfo(String tenantId, String account, String password) {
-		return R.data(service.userInfo(tenantId, account, password));
+	public CommonResult<UserInfo> userInfo(String tenantId, String account, String password) {
+		return CommonResult.data(service.userInfo(tenantId, account, password));
 	}
 
 }

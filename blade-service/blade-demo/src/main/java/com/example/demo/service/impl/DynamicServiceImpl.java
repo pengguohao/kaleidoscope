@@ -4,7 +4,7 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 import com.example.demo.entity.Notice;
 import com.example.demo.mapper.NoticeMapper;
 import com.example.demo.service.IDynamicService;
-import org.springblade.core.mp.base.BaseServiceImpl;
+import com.pgh.kaleidoscope.core.mp.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springblade.core.tool.node.INode;
+import com.pgh.kaleidoscope.core.tool.node.INode;
 import org.springblade.system.entity.Dept;
 
 import java.util.ArrayList;

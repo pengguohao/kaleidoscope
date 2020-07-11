@@ -15,8 +15,8 @@
  */
 package org.springblade.desk.feign;
 
-import org.springblade.core.launch.constant.AppConstant;
-import org.springblade.core.tool.api.R;
+import com.pgh.kaleidoscope.core.launch.constant.AppConstant;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springblade.desk.entity.Notice;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +43,6 @@ public interface INoticeClient {
 	 * @return
 	 */
 	@GetMapping(API_PREFIX + "/top")
-	R<List<Notice>> top(@RequestParam("number") Integer number);
+	CommonResult<List<Notice>> top(@RequestParam("number") Integer number);
 
 }

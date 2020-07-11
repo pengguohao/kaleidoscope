@@ -1,7 +1,7 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springblade.core.test.BladeBootTest;
-import org.springblade.core.test.BladeSpringRunner;
+import com.pgh.kaleidoscope.core.test.KaleidoscopeBootTest;
+import com.pgh.kaleidoscope.core.test.KaleidoscopeSpringRunner;
 import org.springblade.desk.DeskApplication;
 import org.springblade.desk.service.INoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
  *
  * @author Chill
  */
-@RunWith(BladeSpringRunner.class)
+@RunWith(KaleidoscopeSpringRunner.class)
 @SpringBootTest(classes = DeskApplication.class)
-@BladeBootTest(appName = "blade-desk", profile = "test", enableLoader = true)
+@KaleidoscopeBootTest(appName = "blade-desk", profile = "test", enableLoader = true)
 public class BladeDemoTest {
 
 	@Autowired

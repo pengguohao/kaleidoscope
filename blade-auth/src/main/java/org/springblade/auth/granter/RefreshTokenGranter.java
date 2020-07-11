@@ -17,10 +17,10 @@ package org.springblade.auth.granter;
 
 import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
-import org.springblade.core.launch.constant.TokenConstant;
-import org.springblade.core.secure.utils.SecureUtil;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.launch.constant.TokenConstant;
+import com.pgh.kaleidoscope.core.secure.utils.SecureUtil;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.user.entity.UserInfo;
 import org.springblade.system.user.feign.IUserClient;
 import org.springframework.stereotype.Component;
@@ -49,7 +49,7 @@ public class RefreshTokenGranter implements ITokenGranter {
 			Claims claims = SecureUtil.parseJWT(refreshToken);
 			String tokenType = Func.toStr(Objects.requireNonNull(claims).get(TokenConstant.TOKEN_TYPE));
 			if (tokenType.equals(TokenConstant.REFRESH_TOKEN)) {
-				R<UserInfo> result = userClient.userInfo(Func.toLong(claims.get(TokenConstant.USER_ID)));
+				CommonResult<UserInfo> result = userClient.userInfo(Func.toLong(claims.get(TokenConstant.USER_ID)));
 				userInfo = result.isSuccess() ? result.getData() : null;
 			}
 		}

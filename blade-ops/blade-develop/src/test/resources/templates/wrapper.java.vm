@@ -16,9 +16,8 @@
 #set($wrapperPackage=$package.Entity.replace("entity","wrapper"))
 package $!{wrapperPackage};
 
-import lombok.AllArgsConstructor;
-import org.springblade.core.mp.support.BaseEntityWrapper;
-import org.springblade.core.tool.utils.BeanUtil;
+import com.pgh.kaleidoscope.core.mp.support.BaseEntityWrapper;
+import com.pgh.kaleidoscope.core.tool.utils.BeanUtil;
 import $!{package.Entity}.$!{entity};
 #set($voPackage=$package.Entity.replace("entity","vo"))
 import $!{voPackage}.$!{entity}VO;

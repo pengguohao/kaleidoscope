@@ -16,8 +16,8 @@
 package org.springblade.system.user.feign;
 
 
-import org.springblade.core.launch.constant.AppConstant;
-import org.springblade.core.tool.api.R;
+import com.pgh.kaleidoscope.core.launch.constant.AppConstant;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springblade.system.user.entity.UserInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +43,7 @@ public interface IUserClient {
 	 * @return
 	 */
 	@GetMapping(API_PREFIX + "/user-info-by-id")
-	R<UserInfo> userInfo(@RequestParam("userId") Long userId);
+	CommonResult<UserInfo> userInfo(@RequestParam("userId") Long userId);
 
 	/**
 	 * 获取用户信息
@@ -54,6 +54,6 @@ public interface IUserClient {
 	 * @return
 	 */
 	@GetMapping(API_PREFIX + "/user-info")
-	R<UserInfo> userInfo(@RequestParam("tenantId") String tenantId, @RequestParam("account") String account, @RequestParam("password") String password);
+	CommonResult<UserInfo> userInfo(@RequestParam("tenantId") String tenantId, @RequestParam("account") String account, @RequestParam("password") String password);
 
 }

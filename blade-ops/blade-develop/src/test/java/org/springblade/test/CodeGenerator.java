@@ -16,7 +16,7 @@
 package org.springblade.test;
 
 
-import org.springblade.develop.support.BladeCodeGenerator;
+import com.pgh.kaleidoscope.develop.support.KaleidoscopeCodeGenerator;
 
 /**
  * 代码生成器
@@ -71,7 +71,7 @@ public class CodeGenerator {
 	 * RUN THIS
 	 */
 	public static void main(String[] args) {
-		BladeCodeGenerator generator = new BladeCodeGenerator();
+		KaleidoscopeCodeGenerator generator = new KaleidoscopeCodeGenerator();
 		generator.setCodeName(CODE_NAME);
 		generator.setServiceName(SERVICE_NAME);
 		generator.setSystemName(SYSTEM_NAME);

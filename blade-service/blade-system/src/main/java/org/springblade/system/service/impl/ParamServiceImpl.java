@@ -16,7 +16,7 @@
 package org.springblade.system.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.springblade.core.mp.base.BaseServiceImpl;
+import com.pgh.kaleidoscope.core.mp.base.BaseServiceImpl;
 import org.springblade.system.entity.Param;
 import org.springblade.system.mapper.ParamMapper;
 import org.springblade.system.service.IParamService;

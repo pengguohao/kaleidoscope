@@ -17,7 +17,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Notice;
-import org.springblade.core.mp.base.BaseService;
+import com.pgh.kaleidoscope.core.mp.base.BaseService;
 
 import java.util.List;
 

@@ -15,7 +15,7 @@
  */
 package org.springblade.system.feign;
 
-import org.springblade.core.launch.constant.AppConstant;
+import com.pgh.kaleidoscope.core.launch.constant.AppConstant;
 import org.springblade.system.entity.Dept;
 import org.springblade.system.entity.Role;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -19,7 +19,7 @@ package com.example.demo.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.demo.mapper.NoticeMapper;
 import com.example.demo.service.INoticeService;
-import org.springblade.core.mp.base.BaseServiceImpl;
+import com.pgh.kaleidoscope.core.mp.base.BaseServiceImpl;
 import com.example.demo.entity.Notice;
 import org.springframework.stereotype.Service;
 

@@ -16,7 +16,7 @@
 package org.springblade.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.springblade.core.mp.base.BaseService;
+import com.pgh.kaleidoscope.core.mp.base.BaseService;
 import org.springblade.system.entity.Tenant;
 
 /**

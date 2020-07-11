@@ -7,8 +7,9 @@
 
     <parent>
         <groupId>com.pgh</groupId>
-        <artifactId>Kaleidoscope</artifactId>
+        <artifactId>kaleidoscope</artifactId>
         <version>${kaleidoscope.version}</version>
+        <relativePath>../</relativePath>
     </parent>
 
     <artifactId>blade-auth</artifactId>
@@ -24,16 +25,16 @@
             <version>${blade.project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springblade</groupId>
-            <artifactId>blade-core-cloud</artifactId>
+            <groupId>com.pgh</groupId>
+            <artifactId>kaleidoscope-core-cloud</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springblade</groupId>
-            <artifactId>blade-core-secure</artifactId>
+            <groupId>com.pgh</groupId>
+            <artifactId>kaleidoscope-core-secure</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springblade</groupId>
-            <artifactId>blade-core-log</artifactId>
+            <groupId>com.pgh</groupId>
+            <artifactId>kaleidoscope-core-log</artifactId>
         </dependency>
         <dependency>
             <groupId>com.pgh</groupId>
@@ -41,8 +42,12 @@
             <version>${blade.project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springblade</groupId>
-            <artifactId>blade-core-swagger</artifactId>
+            <groupId>com.pgh</groupId>
+            <artifactId>kaleidoscope-core-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pgh</groupId>
+            <artifactId>kaleidoscope-core-tool</artifactId>
         </dependency>
         <!-- Captcha -->
         <dependency>
@@ -61,6 +66,7 @@
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>-->
     </dependencies>
+
 
     <build>
         <plugins>

@@ -16,7 +16,7 @@
 package org.springblade.desk.test.launcher;
 
 import org.springblade.common.constant.LauncherConstant;
-import org.springblade.core.launch.service.LauncherService;
+import com.pgh.kaleidoscope.core.launch.service.LauncherService;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import java.util.Properties;

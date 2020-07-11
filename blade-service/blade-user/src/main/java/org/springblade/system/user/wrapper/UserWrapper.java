@@ -15,11 +15,11 @@
  */
 package org.springblade.system.user.wrapper;
 
-import org.springblade.core.mp.support.BaseEntityWrapper;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.utils.BeanUtil;
-import org.springblade.core.tool.utils.Func;
-import org.springblade.core.tool.utils.SpringUtil;
+import com.pgh.kaleidoscope.core.mp.support.BaseEntityWrapper;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.utils.BeanUtil;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.tool.utils.SpringUtil;
 import org.springblade.system.feign.IDictClient;
 import org.springblade.system.user.entity.User;
 import org.springblade.system.user.service.IUserService;
@@ -54,7 +54,7 @@ public class UserWrapper extends BaseEntityWrapper<User, UserVO> {
 		List<String> deptName = userService.getDeptName(user.getDeptId());
 		userVO.setRoleName(Func.join(roleName));
 		userVO.setDeptName(Func.join(deptName));
-		R<String> dict = dictClient.getValue("sex", Func.toInt(user.getSex()));
+		CommonResult<String> dict = dictClient.getValue("sex", Func.toInt(user.getSex()));
 		if (dict.isSuccess()) {
 			userVO.setSexName(dict.getData());
 		}

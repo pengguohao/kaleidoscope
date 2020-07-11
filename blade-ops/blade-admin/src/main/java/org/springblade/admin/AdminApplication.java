@@ -16,8 +16,8 @@
 package org.springblade.admin;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
-import org.springblade.core.launch.BladeApplication;
-import org.springblade.core.launch.constant.AppConstant;
+import com.pgh.kaleidoscope.core.launch.KaleidoscopeApplication;
+import com.pgh.kaleidoscope.core.launch.constant.AppConstant;
 import org.springframework.cloud.client.SpringCloudApplication;
 
 /**
@@ -30,7 +30,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 public class AdminApplication {
 
 	public static void main(String[] args) {
-		BladeApplication.run(AppConstant.APPLICATION_ADMIN_NAME, AdminApplication.class, args);
+		KaleidoscopeApplication.run(AppConstant.APPLICATION_ADMIN_NAME, AdminApplication.class, args);
 	}
 
 }

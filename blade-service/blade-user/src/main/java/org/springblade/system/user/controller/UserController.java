@@ -28,13 +28,13 @@ import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.codec.Charsets;
-import org.springblade.core.mp.support.Condition;
-import org.springblade.core.mp.support.Query;
-import org.springblade.core.secure.BladeUser;
-import org.springblade.core.secure.utils.SecureUtil;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.constant.BladeConstant;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.mp.support.Condition;
+import com.pgh.kaleidoscope.core.mp.support.Query;
+import com.pgh.kaleidoscope.core.secure.KaleidoscopeUser;
+import com.pgh.kaleidoscope.core.secure.utils.SecureUtil;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.constant.KaleidoscopeConstant;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.user.entity.User;
 import org.springblade.system.user.excel.UserExcel;
 import org.springblade.system.user.excel.UserImportListener;
@@ -74,9 +74,9 @@ public class UserController {
 	@ApiOperationSupport(order = 1)
 	@ApiOperation(value = "查看详情", notes = "传入id")
 	@GetMapping("/detail")
-	public R<UserVO> detail(User user) {
+	public CommonResult<UserVO> detail(User user) {
 		User detail = userService.getOne(Condition.getQueryWrapper(user));
-		return R.data(UserWrapper.build().entityVO(detail));
+		return CommonResult.data(UserWrapper.build().entityVO(detail));
 	}
 
 	/**
@@ -85,9 +85,9 @@ public class UserController {
 	@ApiOperationSupport(order =2)
 	@ApiOperation(value = "查看详情", notes = "传入id")
 	@GetMapping("/info")
-	public R<UserVO> info(BladeUser user) {
+	public CommonResult<UserVO> info(KaleidoscopeUser user) {
 		User detail = userService.getById(user.getUserId());
-		return R.data(UserWrapper.build().entityVO(detail));
+		return CommonResult.data(UserWrapper.build().entityVO(detail));
 	}
 
 	/**
@@ -100,10 +100,10 @@ public class UserController {
 	})
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "列表", notes = "传入account和realName")
-	public R<IPage<UserVO>> list(@ApiIgnore @RequestParam Map<String, Object> user, Query query, BladeUser bladeUser) {
+	public CommonResult<IPage<UserVO>> list(@ApiIgnore @RequestParam Map<String, Object> user, Query query, KaleidoscopeUser kaleidoscopeUser) {
 		QueryWrapper<User> queryWrapper = Condition.getQueryWrapper(user, User.class);
-		IPage<User> pages = userService.page(Condition.getPage(query), (!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(User::getTenantId, bladeUser.getTenantId()) : queryWrapper);
-		return R.data(UserWrapper.build().pageVO(pages));
+		IPage<User> pages = userService.page(Condition.getPage(query), (!kaleidoscopeUser.getTenantId().equals(KaleidoscopeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(User::getTenantId, kaleidoscopeUser.getTenantId()) : queryWrapper);
+		return CommonResult.data(UserWrapper.build().pageVO(pages));
 	}
 
 	/**
@@ -112,8 +112,8 @@ public class UserController {
 	@PostMapping("/submit")
 	@ApiOperationSupport(order = 4)
 	@ApiOperation(value = "新增或修改", notes = "传入User")
-	public R submit(@Valid @RequestBody User user) {
-		return R.status(userService.submit(user));
+	public CommonResult submit(@Valid @RequestBody User user) {
+		return CommonResult.status(userService.submit(user));
 	}
 
 	/**
@@ -122,8 +122,8 @@ public class UserController {
 	@PostMapping("/update")
 	@ApiOperationSupport(order = 5)
 	@ApiOperation(value = "修改", notes = "传入User")
-	public R update(@Valid @RequestBody User user) {
-		return R.status(userService.updateById(user));
+	public CommonResult update(@Valid @RequestBody User user) {
+		return CommonResult.status(userService.updateById(user));
 	}
 
 	/**
@@ -132,8 +132,8 @@ public class UserController {
 	@PostMapping("/remove")
 	@ApiOperationSupport(order = 6)
 	@ApiOperation(value = "删除", notes = "传入地基和")
-	public R remove(@RequestParam String ids) {
-		return R.status(userService.deleteLogic(Func.toLongList(ids)));
+	public CommonResult remove(@RequestParam String ids) {
+		return CommonResult.status(userService.deleteLogic(Func.toLongList(ids)));
 	}
 
 
@@ -147,18 +147,18 @@ public class UserController {
 	@PostMapping("/grant")
 	@ApiOperationSupport(order = 7)
 	@ApiOperation(value = "权限设置", notes = "传入roleId集合以及menuId集合")
-	public R grant(@ApiParam(value = "userId集合", required = true) @RequestParam String userIds,
-				   @ApiParam(value = "roleId集合", required = true) @RequestParam String roleIds) {
+	public CommonResult grant(@ApiParam(value = "userId集合", required = true) @RequestParam String userIds,
+							  @ApiParam(value = "roleId集合", required = true) @RequestParam String roleIds) {
 		boolean temp = userService.grant(userIds, roleIds);
-		return R.status(temp);
+		return CommonResult.status(temp);
 	}
 
 	@PostMapping("/reset-password")
 	@ApiOperationSupport(order = 8)
 	@ApiOperation(value = "初始化密码", notes = "传入userId集合")
-	public R resetPassword(@ApiParam(value = "userId集合", required = true) @RequestParam String userIds) {
+	public CommonResult resetPassword(@ApiParam(value = "userId集合", required = true) @RequestParam String userIds) {
 		boolean temp = userService.resetPassword(userIds);
-		return R.status(temp);
+		return CommonResult.status(temp);
 	}
 
 	/**
@@ -172,11 +172,11 @@ public class UserController {
 	@PostMapping("/update-password")
 	@ApiOperationSupport(order = 9)
 	@ApiOperation(value = "修改密码", notes = "传入密码")
-	public R updatePassword(BladeUser user, @ApiParam(value = "旧密码", required = true) @RequestParam String oldPassword,
-							@ApiParam(value = "新密码", required = true) @RequestParam String newPassword,
-							@ApiParam(value = "新密码", required = true) @RequestParam String newPassword1) {
+	public CommonResult updatePassword(KaleidoscopeUser user, @ApiParam(value = "旧密码", required = true) @RequestParam String oldPassword,
+									   @ApiParam(value = "新密码", required = true) @RequestParam String newPassword,
+									   @ApiParam(value = "新密码", required = true) @RequestParam String newPassword1) {
 		boolean temp = userService.updatePassword(user.getUserId(), oldPassword, newPassword, newPassword1);
-		return R.status(temp);
+		return CommonResult.status(temp);
 	}
 
 	/**
@@ -188,9 +188,9 @@ public class UserController {
 	@GetMapping("/user-list")
 	@ApiOperationSupport(order = 10)
 	@ApiOperation(value = "用户列表", notes = "传入user")
-	public R<List<User>> userList(User user) {
+	public CommonResult<List<User>> userList(User user) {
 		List<User> list = userService.list(Condition.getQueryWrapper(user));
-		return R.data(list);
+		return CommonResult.data(list);
 	}
 
 
@@ -200,7 +200,7 @@ public class UserController {
 	@PostMapping("import-user")
 	@ApiOperationSupport(order = 12)
 	@ApiOperation(value = "导入用户", notes = "传入excel")
-	public R importUser(MultipartFile file, Integer isCovered) {
+	public CommonResult importUser(MultipartFile file, Integer isCovered) {
 		String filename = file.getOriginalFilename();
 		if (StringUtils.isEmpty(filename)) {
 			throw new RuntimeException("请上传文件!");
@@ -217,7 +217,7 @@ public class UserController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return R.success("操作成功");
+		return CommonResult.success("操作成功");
 	}
 
 	/**
@@ -227,12 +227,12 @@ public class UserController {
 	@GetMapping("export-user")
 	@ApiOperationSupport(order = 13)
 	@ApiOperation(value = "导出用户", notes = "传入user")
-	public void exportUser(@ApiIgnore @RequestParam Map<String, Object> user, BladeUser bladeUser, HttpServletResponse response) {
+	public void exportUser(@ApiIgnore @RequestParam Map<String, Object> user, KaleidoscopeUser kaleidoscopeUser, HttpServletResponse response) {
 		QueryWrapper<User> queryWrapper = Condition.getQueryWrapper(user, User.class);
 		if (!SecureUtil.isAdministrator()){
-			queryWrapper.lambda().eq(User::getTenantId, bladeUser.getTenantId());
+			queryWrapper.lambda().eq(User::getTenantId, kaleidoscopeUser.getTenantId());
 		}
-		queryWrapper.lambda().eq(User::getIsDeleted, BladeConstant.DB_NOT_DELETED);
+		queryWrapper.lambda().eq(User::getIsDeleted, KaleidoscopeConstant.DB_NOT_DELETED);
 		List<UserExcel> list = userService.exportUser(queryWrapper);
 		response.setContentType("application/vnd.ms-excel");
 		response.setCharacterEncoding(Charsets.UTF_8.name());

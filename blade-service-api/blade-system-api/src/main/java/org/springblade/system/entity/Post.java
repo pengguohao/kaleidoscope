@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springblade.core.mp.base.TenantEntity;
+import com.pgh.kaleidoscope.core.mp.base.TenantEntity;
 
 /**
  * 岗位表实体类

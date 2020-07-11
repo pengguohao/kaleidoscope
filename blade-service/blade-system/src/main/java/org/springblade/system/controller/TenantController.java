@@ -19,13 +19,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
-import org.springblade.core.boot.ctrl.BladeController;
-import org.springblade.core.mp.support.Condition;
-import org.springblade.core.mp.support.Query;
-import org.springblade.core.secure.BladeUser;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.constant.BladeConstant;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.boot.controller.BladeController;
+import com.pgh.kaleidoscope.core.mp.support.Condition;
+import com.pgh.kaleidoscope.core.mp.support.Query;
+import com.pgh.kaleidoscope.core.secure.KaleidoscopeUser;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.constant.KaleidoscopeConstant;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.entity.Tenant;
 import org.springblade.system.service.ITenantService;
 import org.springframework.web.bind.annotation.*;
@@ -54,9 +54,9 @@ public class TenantController extends BladeController {
 	 */
 	@GetMapping("/detail")
 	@ApiOperation(value = "详情", notes = "传入tenant")
-	public R<Tenant> detail(Tenant tenant) {
+	public CommonResult<Tenant> detail(Tenant tenant) {
 		Tenant detail = tenantService.getOne(Condition.getQueryWrapper(tenant));
-		return R.data(detail);
+		return CommonResult.data(detail);
 	}
 
 	/**
@@ -69,10 +69,10 @@ public class TenantController extends BladeController {
 		@ApiImplicitParam(name = "contactNumber", value = "联系电话", paramType = "query", dataType = "string")
 	})
 	@ApiOperation(value = "分页", notes = "传入tenant")
-	public R<IPage<Tenant>> list(@ApiIgnore @RequestParam Map<String, Object> tenant, Query query, BladeUser bladeUser) {
+	public CommonResult<IPage<Tenant>> list(@ApiIgnore @RequestParam Map<String, Object> tenant, Query query, KaleidoscopeUser kaleidoscopeUser) {
 		QueryWrapper<Tenant> queryWrapper = Condition.getQueryWrapper(tenant, Tenant.class);
-		IPage<Tenant> pages = tenantService.page(Condition.getPage(query), (!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(Tenant::getTenantId, bladeUser.getTenantId()) : queryWrapper);
-		return R.data(pages);
+		IPage<Tenant> pages = tenantService.page(Condition.getPage(query), (!kaleidoscopeUser.getTenantId().equals(KaleidoscopeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(Tenant::getTenantId, kaleidoscopeUser.getTenantId()) : queryWrapper);
+		return CommonResult.data(pages);
 	}
 
 	/**
@@ -80,10 +80,10 @@ public class TenantController extends BladeController {
 	 */
 	@GetMapping("/select")
 	@ApiOperation(value = "下拉数据源", notes = "传入tenant")
-	public R<List<Tenant>> select(Tenant tenant, BladeUser bladeUser) {
+	public CommonResult<List<Tenant>> select(Tenant tenant, KaleidoscopeUser kaleidoscopeUser) {
 		QueryWrapper<Tenant> queryWrapper = Condition.getQueryWrapper(tenant);
-		List<Tenant> list = tenantService.list((!bladeUser.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(Tenant::getTenantId, bladeUser.getTenantId()) : queryWrapper);
-		return R.data(list);
+		List<Tenant> list = tenantService.list((!kaleidoscopeUser.getTenantId().equals(KaleidoscopeConstant.ADMIN_TENANT_ID)) ? queryWrapper.lambda().eq(Tenant::getTenantId, kaleidoscopeUser.getTenantId()) : queryWrapper);
+		return CommonResult.data(list);
 	}
 
 	/**
@@ -91,9 +91,9 @@ public class TenantController extends BladeController {
 	 */
 	@GetMapping("/page")
 	@ApiOperation(value = "分页", notes = "传入tenant")
-	public R<IPage<Tenant>> page(Tenant tenant, Query query) {
+	public CommonResult<IPage<Tenant>> page(Tenant tenant, Query query) {
 		IPage<Tenant> pages = tenantService.selectTenantPage(Condition.getPage(query), tenant);
-		return R.data(pages);
+		return CommonResult.data(pages);
 	}
 
 	/**
@@ -101,8 +101,8 @@ public class TenantController extends BladeController {
 	 */
 	@PostMapping("/submit")
 	@ApiOperation(value = "新增或修改", notes = "传入tenant")
-	public R submit(@Valid @RequestBody Tenant tenant) {
-		return R.status(tenantService.saveTenant(tenant));
+	public CommonResult submit(@Valid @RequestBody Tenant tenant) {
+		return CommonResult.status(tenantService.saveTenant(tenant));
 	}
 
 
@@ -111,8 +111,8 @@ public class TenantController extends BladeController {
 	 */
 	@PostMapping("/remove")
 	@ApiOperation(value = "逻辑删除", notes = "传入ids")
-	public R remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
-		return R.status(tenantService.deleteLogic(Func.toLongList(ids)));
+	public CommonResult remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
+		return CommonResult.status(tenantService.deleteLogic(Func.toLongList(ids)));
 	}
 
 

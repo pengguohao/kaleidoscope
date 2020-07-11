@@ -15,7 +15,7 @@
  */
 package org.springblade.gateway.provider;
 
-import org.springblade.core.launch.constant.TokenConstant;
+import com.pgh.kaleidoscope.core.launch.constant.TokenConstant;
 
 import java.util.ArrayList;
 import java.util.List;

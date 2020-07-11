@@ -15,7 +15,7 @@
  */
 package org.springblade.system.user.feign;
 
-import org.springblade.core.tool.api.R;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springblade.system.user.entity.UserInfo;
 import org.springframework.stereotype.Component;
 
@@ -28,12 +28,12 @@ import org.springframework.stereotype.Component;
 public class IUserClientFallback implements IUserClient {
 
 	@Override
-	public R<UserInfo> userInfo(Long userId) {
-		return R.fail("未获取到账号信息");
+	public CommonResult<UserInfo> userInfo(Long userId) {
+		return CommonResult.fail("未获取到账号信息");
 	}
 
 	@Override
-	public R<UserInfo> userInfo(String tenantId, String account, String password) {
-		return R.fail("未获取到账号信息");
+	public CommonResult<UserInfo> userInfo(String tenantId, String account, String password) {
+		return CommonResult.fail("未获取到账号信息");
 	}
 }

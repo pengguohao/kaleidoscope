@@ -3,8 +3,8 @@ package org.springblade.desk.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.support.Kv;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.support.Kv;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +32,7 @@ public class DashBoardController {
 	 */
 	@GetMapping("/activities")
 	@ApiOperation(value = "活跃用户", notes = "活跃用户")
-	public R activities() {
+	public CommonResult activities() {
 
 		List<Map<String, Object>> list = new ArrayList<>();
 		Map<String, Object> map1 = new HashMap<>(16);
@@ -53,6 +53,6 @@ public class DashBoardController {
 		map2.put("template", "在  @{group} 新建项目 @{project}");
 		list.add(map2);
 
-		return R.data(list);
+		return CommonResult.data(list);
 	}
 }

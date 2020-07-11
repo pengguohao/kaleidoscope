@@ -16,12 +16,12 @@
 package org.springblade.system.wrapper;
 
 import org.springblade.common.constant.CommonConstant;
-import org.springblade.core.mp.support.BaseEntityWrapper;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.node.ForestNodeMerger;
-import org.springblade.core.tool.utils.BeanUtil;
-import org.springblade.core.tool.utils.Func;
-import org.springblade.core.tool.utils.SpringUtil;
+import com.pgh.kaleidoscope.core.mp.support.BaseEntityWrapper;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.node.ForestNodeMerger;
+import com.pgh.kaleidoscope.core.tool.utils.BeanUtil;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.tool.utils.SpringUtil;
 import org.springblade.system.entity.Menu;
 import org.springblade.system.feign.IDictClient;
 import org.springblade.system.service.IMenuService;
@@ -59,9 +59,9 @@ public class MenuWrapper extends BaseEntityWrapper<Menu, MenuVO> {
 			Menu parent = menuService.getById(menu.getParentId());
 			menuVO.setParentName(parent.getName());
 		}
-		R<String> d1 = dictClient.getValue("menu_category", Func.toInt(menuVO.getCategory()));
-		R<String> d2 = dictClient.getValue("button_func", Func.toInt(menuVO.getAction()));
-		R<String> d3 = dictClient.getValue("yes_no", Func.toInt(menuVO.getIsOpen()));
+		CommonResult<String> d1 = dictClient.getValue("menu_category", Func.toInt(menuVO.getCategory()));
+		CommonResult<String> d2 = dictClient.getValue("button_func", Func.toInt(menuVO.getAction()));
+		CommonResult<String> d3 = dictClient.getValue("yes_no", Func.toInt(menuVO.getIsOpen()));
 		if (d1.isSuccess()) {
 			menuVO.setCategoryName(d1.getData());
 		}

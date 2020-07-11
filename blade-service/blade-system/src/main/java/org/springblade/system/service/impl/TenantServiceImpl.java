@@ -18,10 +18,10 @@ package org.springblade.system.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
-import org.springblade.core.boot.tenant.TenantId;
-import org.springblade.core.mp.base.BaseServiceImpl;
-import org.springblade.core.tool.constant.BladeConstant;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.boot.tenant.TenantId;
+import com.pgh.kaleidoscope.core.mp.base.BaseServiceImpl;
+import com.pgh.kaleidoscope.core.tool.constant.KaleidoscopeConstant;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.entity.Dept;
 import org.springblade.system.entity.Role;
 import org.springblade.system.entity.Tenant;
@@ -57,7 +57,7 @@ public class TenantServiceImpl extends BaseServiceImpl<TenantMapper, Tenant> imp
 	@Transactional(rollbackFor = Exception.class)
 	public boolean saveTenant(Tenant tenant) {
 		if (Func.isEmpty(tenant.getId())) {
-			List<Tenant> tenants = baseMapper.selectList(Wrappers.<Tenant>query().lambda().eq(Tenant::getIsDeleted, BladeConstant.DB_NOT_DELETED));
+			List<Tenant> tenants = baseMapper.selectList(Wrappers.<Tenant>query().lambda().eq(Tenant::getIsDeleted, KaleidoscopeConstant.DB_NOT_DELETED));
 			List<String> codes = tenants.stream().map(Tenant::getTenantId).collect(Collectors.toList());
 			String tenantId = getTenantId(codes);
 			tenant.setTenantId(tenantId);

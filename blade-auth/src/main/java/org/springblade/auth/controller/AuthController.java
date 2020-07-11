@@ -25,12 +25,12 @@ import org.springblade.auth.granter.TokenGranterBuilder;
 import org.springblade.auth.granter.TokenParameter;
 import org.springblade.auth.utils.TokenUtil;
 import org.springblade.common.cache.CacheNames;
-import org.springblade.core.secure.AuthInfo;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.support.Kv;
-import org.springblade.core.tool.utils.Func;
-import org.springblade.core.tool.utils.RedisUtil;
-import org.springblade.core.tool.utils.WebUtil;
+import com.pgh.kaleidoscope.core.secure.AuthInfo;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.support.Kv;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.tool.utils.RedisUtil;
+import com.pgh.kaleidoscope.core.tool.utils.WebUtil;
 import org.springblade.system.user.entity.UserInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,11 +54,11 @@ public class AuthController {
 
 	@PostMapping("token")
 	@ApiOperation(value = "获取认证token", notes = "传入租户ID:tenantId,账号:account,密码:password")
-	public R<AuthInfo> token(@ApiParam(value = "授权类型", required = true) @RequestParam(defaultValue = "password", required = false) String grantType,
-							 @ApiParam(value = "刷新令牌") @RequestParam(required = false) String refreshToken,
-							 @ApiParam(value = "租户ID", required = true) @RequestParam(defaultValue = "000000", required = false) String tenantId,
-							 @ApiParam(value = "账号") @RequestParam(required = false) String account,
-							 @ApiParam(value = "密码") @RequestParam(required = false) String password) {
+	public CommonResult<AuthInfo> token(@ApiParam(value = "授权类型", required = true) @RequestParam(defaultValue = "password", required = false) String grantType,
+										@ApiParam(value = "刷新令牌") @RequestParam(required = false) String refreshToken,
+										@ApiParam(value = "租户ID", required = true) @RequestParam(defaultValue = "000000", required = false) String tenantId,
+										@ApiParam(value = "账号") @RequestParam(required = false) String account,
+										@ApiParam(value = "密码") @RequestParam(required = false) String password) {
 
 		String userType = Func.toStr(WebUtil.getRequest().getHeader(TokenUtil.USER_TYPE_HEADER_KEY), TokenUtil.DEFAULT_USER_TYPE);
 
@@ -74,22 +74,22 @@ public class AuthController {
 		UserInfo userInfo = granter.grant(tokenParameter);
 
 		if (userInfo == null || userInfo.getUser() == null || userInfo.getUser().getId() == null) {
-			return R.fail(TokenUtil.USER_NOT_FOUND);
+			return CommonResult.fail(TokenUtil.USER_NOT_FOUND);
 		}
 
-		return R.data(TokenUtil.createAuthInfo(userInfo));
+		return CommonResult.data(TokenUtil.createAuthInfo(userInfo));
 	}
 
 	@GetMapping("/captcha")
 	@ApiOperation(value = "获取验证码")
-	public R<Kv> captcha() {
+	public CommonResult<Kv> captcha() {
 		SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
 		String verCode = specCaptcha.text().toLowerCase();
 		String key = UUID.randomUUID().toString();
 		// 存入redis并设置过期时间为30分钟
 		redisUtil.set(CacheNames.CAPTCHA_KEY + key, verCode, 30L, TimeUnit.MINUTES);
 		// 将key和base64返回给前端
-		return R.data(Kv.init().set("key", key).set("image", specCaptcha.toBase64()));
+		return CommonResult.data(Kv.init().set("key", key).set("image", specCaptcha.toBase64()));
 	}
 
 }

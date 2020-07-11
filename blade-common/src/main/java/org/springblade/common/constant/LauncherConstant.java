@@ -1,6 +1,6 @@
 package org.springblade.common.constant;
 
-import org.springblade.core.launch.constant.AppConstant;
+import com.pgh.kaleidoscope.core.launch.constant.AppConstant;
 
 /**
  * 通用常量

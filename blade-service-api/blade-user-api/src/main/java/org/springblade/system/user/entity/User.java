@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springblade.core.mp.base.TenantEntity;
+import com.pgh.kaleidoscope.core.mp.base.TenantEntity;
 
 import java.util.Date;
 

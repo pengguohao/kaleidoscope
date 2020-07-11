@@ -18,14 +18,14 @@ package org.springblade.system.controller;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
-import org.springblade.core.boot.ctrl.BladeController;
-import org.springblade.core.mp.support.Condition;
-import org.springblade.core.secure.BladeUser;
-import org.springblade.core.secure.annotation.PreAuth;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.constant.RoleConstant;
-import org.springblade.core.tool.support.Kv;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.boot.controller.BladeController;
+import com.pgh.kaleidoscope.core.mp.support.Condition;
+import com.pgh.kaleidoscope.core.secure.KaleidoscopeUser;
+import com.pgh.kaleidoscope.core.secure.annotation.PreAuth;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.constant.RoleConstant;
+import com.pgh.kaleidoscope.core.tool.support.Kv;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.entity.Menu;
 import org.springblade.system.service.IMenuService;
 import org.springblade.system.vo.MenuVO;
@@ -57,9 +57,9 @@ public class MenuController extends BladeController {
 	@PreAuth(RoleConstant.HAS_ROLE_ADMIN)
 	@ApiOperationSupport(order = 1)
 	@ApiOperation(value = "详情", notes = "传入menu")
-	public R<MenuVO> detail(Menu menu) {
+	public CommonResult<MenuVO> detail(Menu menu) {
 		Menu detail = menuService.getOne(Condition.getQueryWrapper(menu));
-		return R.data(MenuWrapper.build().entityVO(detail));
+		return CommonResult.data(MenuWrapper.build().entityVO(detail));
 	}
 
 	/**
@@ -73,10 +73,10 @@ public class MenuController extends BladeController {
 	@PreAuth(RoleConstant.HAS_ROLE_ADMIN)
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "列表", notes = "传入menu")
-	public R<List<MenuVO>> list(@ApiIgnore @RequestParam Map<String, Object> menu) {
+	public CommonResult<List<MenuVO>> list(@ApiIgnore @RequestParam Map<String, Object> menu) {
 		@SuppressWarnings("unchecked")
 		List<Menu> list = menuService.list(Condition.getQueryWrapper(menu, Menu.class).lambda().orderByAsc(Menu::getSort));
-		return R.data(MenuWrapper.build().listNodeVO(list));
+		return CommonResult.data(MenuWrapper.build().listNodeVO(list));
 	}
 
 	/**
@@ -86,8 +86,8 @@ public class MenuController extends BladeController {
 	@PreAuth(RoleConstant.HAS_ROLE_ADMIN)
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "新增或修改", notes = "传入menu")
-	public R submit(@Valid @RequestBody Menu menu) {
-		return R.status(menuService.saveOrUpdate(menu));
+	public CommonResult submit(@Valid @RequestBody Menu menu) {
+		return CommonResult.status(menuService.saveOrUpdate(menu));
 	}
 
 
@@ -98,8 +98,8 @@ public class MenuController extends BladeController {
 	@PreAuth(RoleConstant.HAS_ROLE_ADMIN)
 	@ApiOperationSupport(order = 4)
 	@ApiOperation(value = "删除", notes = "传入ids")
-	public R remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
-		return R.status(menuService.removeByIds(Func.toLongList(ids)));
+	public CommonResult remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
+		return CommonResult.status(menuService.removeByIds(Func.toLongList(ids)));
 	}
 
 	/**
@@ -108,9 +108,9 @@ public class MenuController extends BladeController {
 	@GetMapping("/routes")
 	@ApiOperationSupport(order = 5)
 	@ApiOperation(value = "前端菜单数据", notes = "前端菜单数据")
-	public R<List<MenuVO>> routes(BladeUser user) {
+	public CommonResult<List<MenuVO>> routes(KaleidoscopeUser user) {
 		List<MenuVO> list = menuService.routes(user.getRoleId());
-		return R.data(list);
+		return CommonResult.data(list);
 	}
 
 	/**
@@ -119,9 +119,9 @@ public class MenuController extends BladeController {
 	@GetMapping("/buttons")
 	@ApiOperationSupport(order = 6)
 	@ApiOperation(value = "前端按钮数据", notes = "前端按钮数据")
-	public R<List<MenuVO>> buttons(BladeUser user) {
+	public CommonResult<List<MenuVO>> buttons(KaleidoscopeUser user) {
 		List<MenuVO> list = menuService.buttons(user.getRoleId());
-		return R.data(list);
+		return CommonResult.data(list);
 	}
 
 	/**
@@ -130,9 +130,9 @@ public class MenuController extends BladeController {
 	@GetMapping("/tree")
 	@ApiOperationSupport(order = 7)
 	@ApiOperation(value = "树形结构", notes = "树形结构")
-	public R<List<MenuVO>> tree() {
+	public CommonResult<List<MenuVO>> tree() {
 		List<MenuVO> tree = menuService.tree();
-		return R.data(tree);
+		return CommonResult.data(tree);
 	}
 
 	/**
@@ -141,8 +141,8 @@ public class MenuController extends BladeController {
 	@GetMapping("/grant-tree")
 	@ApiOperationSupport(order = 8)
 	@ApiOperation(value = "权限分配树形结构", notes = "权限分配树形结构")
-	public R<List<MenuVO>> grantTree(BladeUser user) {
-		return R.data(menuService.grantTree(user));
+	public CommonResult<List<MenuVO>> grantTree(KaleidoscopeUser user) {
+		return CommonResult.data(menuService.grantTree(user));
 	}
 
 	/**
@@ -151,8 +151,8 @@ public class MenuController extends BladeController {
 	@GetMapping("/role-tree-keys")
 	@ApiOperationSupport(order = 9)
 	@ApiOperation(value = "角色所分配的树", notes = "角色所分配的树")
-	public R<List<String>> roleTreeKeys(String roleIds) {
-		return R.data(menuService.roleTreeKeys(roleIds));
+	public CommonResult<List<String>> roleTreeKeys(String roleIds) {
+		return CommonResult.data(menuService.roleTreeKeys(roleIds));
 	}
 
 	/**
@@ -161,8 +161,8 @@ public class MenuController extends BladeController {
 	@GetMapping("auth-routes")
 	@ApiOperationSupport(order = 10)
 	@ApiOperation(value = "菜单的角色权限")
-	public R<List<Kv>> authRoutes(BladeUser user) {
-		return R.data(menuService.authRoutes(user));
+	public CommonResult<List<Kv>> authRoutes(KaleidoscopeUser user) {
+		return CommonResult.data(menuService.authRoutes(user));
 	}
 
 }

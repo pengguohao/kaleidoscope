@@ -19,11 +19,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.AllArgsConstructor;
-import org.springblade.core.secure.BladeUser;
-import org.springblade.core.tool.constant.BladeConstant;
-import org.springblade.core.tool.node.ForestNodeMerger;
-import org.springblade.core.tool.support.Kv;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.secure.KaleidoscopeUser;
+import com.pgh.kaleidoscope.core.tool.constant.KaleidoscopeConstant;
+import com.pgh.kaleidoscope.core.tool.node.ForestNodeMerger;
+import com.pgh.kaleidoscope.core.tool.support.Kv;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.dto.MenuDTO;
 import org.springblade.system.entity.Menu;
 import org.springblade.system.entity.RoleMenu;
@@ -86,8 +86,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 	}
 
 	@Override
-	public List<MenuVO> grantTree(BladeUser user) {
-		return ForestNodeMerger.merge(user.getTenantId().equals(BladeConstant.ADMIN_TENANT_ID) ? baseMapper.grantTree() : baseMapper.grantTreeByRole(Func.toLongList(user.getRoleId())));
+	public List<MenuVO> grantTree(KaleidoscopeUser user) {
+		return ForestNodeMerger.merge(user.getTenantId().equals(KaleidoscopeConstant.ADMIN_TENANT_ID) ? baseMapper.grantTree() : baseMapper.grantTreeByRole(Func.toLongList(user.getRoleId())));
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 	}
 
 	@Override
-	public List<Kv> authRoutes(BladeUser user) {
+	public List<Kv> authRoutes(KaleidoscopeUser user) {
 		if (Func.isEmpty(user)) {
 			return null;
 		}

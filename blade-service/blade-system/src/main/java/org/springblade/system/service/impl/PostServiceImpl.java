@@ -17,8 +17,8 @@ package org.springblade.system.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import org.springblade.core.mp.base.BaseServiceImpl;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.mp.base.BaseServiceImpl;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.entity.Post;
 import org.springblade.system.mapper.PostMapper;
 import org.springblade.system.service.IPostService;

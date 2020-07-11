@@ -16,8 +16,8 @@
 package org.springblade.system.feign;
 
 
-import org.springblade.core.launch.constant.AppConstant;
-import org.springblade.core.tool.api.R;
+import com.pgh.kaleidoscope.core.launch.constant.AppConstant;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springblade.system.entity.Dict;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,7 +46,7 @@ public interface IDictClient {
 	 * @return
 	 */
 	@GetMapping(API_PREFIX + "/getValue")
-	R<String> getValue(@RequestParam("code") String code, @RequestParam("dictKey") Integer dictKey);
+	CommonResult<String> getValue(@RequestParam("code") String code, @RequestParam("dictKey") Integer dictKey);
 
 	/**
 	 * 获取字典表
@@ -55,6 +55,6 @@ public interface IDictClient {
 	 * @return
 	 */
 	@GetMapping(API_PREFIX + "/getList")
-	R<List<Dict>> getList(@RequestParam("code") String code);
+	CommonResult<List<Dict>> getList(@RequestParam("code") String code);
 
 }

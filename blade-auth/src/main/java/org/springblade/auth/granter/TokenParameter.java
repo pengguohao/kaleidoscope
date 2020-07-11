@@ -16,7 +16,7 @@
 package org.springblade.auth.granter;
 
 import lombok.Data;
-import org.springblade.core.tool.support.Kv;
+import com.pgh.kaleidoscope.core.tool.support.Kv;
 
 /**
  * TokenParameter

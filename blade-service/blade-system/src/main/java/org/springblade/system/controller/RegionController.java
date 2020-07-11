@@ -20,11 +20,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
-import org.springblade.core.boot.ctrl.BladeController;
-import org.springblade.core.mp.support.Condition;
-import org.springblade.core.mp.support.Query;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.node.INode;
+import com.pgh.kaleidoscope.core.boot.controller.BladeController;
+import com.pgh.kaleidoscope.core.mp.support.Condition;
+import com.pgh.kaleidoscope.core.mp.support.Query;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.node.INode;
 import org.springblade.system.entity.Region;
 import org.springblade.system.service.IRegionService;
 import org.springblade.system.vo.RegionVO;
@@ -55,9 +55,9 @@ public class RegionController extends BladeController {
 	@GetMapping("/detail")
 	@ApiOperationSupport(order = 1)
 	@ApiOperation(value = "详情", notes = "传入region")
-	public R<RegionVO> detail(Region region) {
+	public CommonResult<RegionVO> detail(Region region) {
 		Region detail = regionService.getOne(Condition.getQueryWrapper(region));
-		return R.data(RegionWrapper.build().entityVO(detail));
+		return CommonResult.data(RegionWrapper.build().entityVO(detail));
 	}
 
 	/**
@@ -66,9 +66,9 @@ public class RegionController extends BladeController {
 	@GetMapping("/list")
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "分页", notes = "传入region")
-	public R<IPage<Region>> list(Region region, Query query) {
+	public CommonResult<IPage<Region>> list(Region region, Query query) {
 		IPage<Region> pages = regionService.page(Condition.getPage(query), Condition.getQueryWrapper(region));
-		return R.data(pages);
+		return CommonResult.data(pages);
 	}
 
 	/**
@@ -81,9 +81,9 @@ public class RegionController extends BladeController {
 	})
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "懒加载列表", notes = "传入menu")
-	public R<List<INode>> lazyList(String parentCode, @ApiIgnore @RequestParam Map<String, Object> menu) {
+	public CommonResult<List<INode>> lazyList(String parentCode, @ApiIgnore @RequestParam Map<String, Object> menu) {
 		List<INode> list = regionService.lazyList(parentCode, menu);
-		return R.data(RegionWrapper.build().listNodeLazyVO(list));
+		return CommonResult.data(RegionWrapper.build().listNodeLazyVO(list));
 	}
 
 	/**
@@ -96,9 +96,9 @@ public class RegionController extends BladeController {
 	})
 	@ApiOperationSupport(order = 4)
 	@ApiOperation(value = "懒加载列表", notes = "传入menu")
-	public R<List<INode>> lazyTree(String parentCode, @ApiIgnore @RequestParam Map<String, Object> menu) {
+	public CommonResult<List<INode>> lazyTree(String parentCode, @ApiIgnore @RequestParam Map<String, Object> menu) {
 		List<INode> list = regionService.lazyTree(parentCode, menu);
-		return R.data(RegionWrapper.build().listNodeLazyVO(list));
+		return CommonResult.data(RegionWrapper.build().listNodeLazyVO(list));
 	}
 
 	/**
@@ -107,8 +107,8 @@ public class RegionController extends BladeController {
 	@PostMapping("/save")
 	@ApiOperationSupport(order = 5)
 	@ApiOperation(value = "新增", notes = "传入region")
-	public R save(@Valid @RequestBody Region region) {
-		return R.status(regionService.save(region));
+	public CommonResult save(@Valid @RequestBody Region region) {
+		return CommonResult.status(regionService.save(region));
 	}
 
 	/**
@@ -117,8 +117,8 @@ public class RegionController extends BladeController {
 	@PostMapping("/update")
 	@ApiOperationSupport(order = 6)
 	@ApiOperation(value = "修改", notes = "传入region")
-	public R update(@Valid @RequestBody Region region) {
-		return R.status(regionService.updateById(region));
+	public CommonResult update(@Valid @RequestBody Region region) {
+		return CommonResult.status(regionService.updateById(region));
 	}
 
 	/**
@@ -127,8 +127,8 @@ public class RegionController extends BladeController {
 	@PostMapping("/submit")
 	@ApiOperationSupport(order = 7)
 	@ApiOperation(value = "新增或修改", notes = "传入region")
-	public R submit(@Valid @RequestBody Region region) {
-		return R.status(regionService.submit(region));
+	public CommonResult submit(@Valid @RequestBody Region region) {
+		return CommonResult.status(regionService.submit(region));
 	}
 
 
@@ -138,8 +138,8 @@ public class RegionController extends BladeController {
 	@PostMapping("/remove")
 	@ApiOperationSupport(order = 8)
 	@ApiOperation(value = "删除", notes = "传入主键")
-	public R remove(@ApiParam(value = "主键", required = true) @RequestParam String id) {
-		return R.status(regionService.removeRegion(id));
+	public CommonResult remove(@ApiParam(value = "主键", required = true) @RequestParam String id) {
+		return CommonResult.status(regionService.removeRegion(id));
 	}
 
 	/**
@@ -148,9 +148,9 @@ public class RegionController extends BladeController {
 	@GetMapping("/select")
 	@ApiOperationSupport(order = 9)
 	@ApiOperation(value = "下拉数据源", notes = "传入tenant")
-	public R<List<Region>> select(@RequestParam(required = false, defaultValue = "00") String code) {
+	public CommonResult<List<Region>> select(@RequestParam(required = false, defaultValue = "00") String code) {
 		List<Region> list = regionService.list(Wrappers.<Region>query().lambda().eq(Region::getParentCode, code));
-		return R.data(list);
+		return CommonResult.data(list);
 	}
 
 

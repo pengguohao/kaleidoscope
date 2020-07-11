@@ -16,7 +16,7 @@
  */
 package com.example.demo;
 
-import org.springblade.core.launch.BladeApplication;
+import com.pgh.kaleidoscope.core.launch.KaleidoscopeApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 
 /**
@@ -28,7 +28,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		BladeApplication.run("blade-demo", DemoApplication.class, args);
+		KaleidoscopeApplication.run("blade-demo", DemoApplication.class, args);
 	}
 
 }

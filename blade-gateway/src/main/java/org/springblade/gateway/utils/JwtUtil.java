@@ -17,7 +17,7 @@ package org.springblade.gateway.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import org.springblade.core.launch.constant.TokenConstant;
+import com.pgh.kaleidoscope.core.launch.constant.TokenConstant;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

@@ -20,11 +20,11 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
 import org.springblade.common.cache.CacheNames;
-import org.springblade.core.boot.ctrl.BladeController;
-import org.springblade.core.mp.support.Condition;
-import org.springblade.core.mp.support.Query;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.boot.controller.BladeController;
+import com.pgh.kaleidoscope.core.mp.support.Condition;
+import com.pgh.kaleidoscope.core.mp.support.Query;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.desk.entity.Notice;
 import org.springblade.desk.service.INoticeService;
 import org.springblade.desk.vo.NoticeVO;
@@ -57,9 +57,9 @@ public class NoticeController extends BladeController implements CacheNames {
 	@GetMapping("/detail")
 	@ApiOperationSupport(order = 1)
 	@ApiOperation(value = "详情", notes = "传入notice")
-	public R<NoticeVO> detail(Notice notice) {
+	public CommonResult<NoticeVO> detail(Notice notice) {
 		Notice detail = noticeService.getOne(Condition.getQueryWrapper(notice));
-		return R.data(NoticeWrapper.build().entityVO(detail));
+		return CommonResult.data(NoticeWrapper.build().entityVO(detail));
 	}
 
 	/**
@@ -72,9 +72,9 @@ public class NoticeController extends BladeController implements CacheNames {
 	})
 	@ApiOperationSupport(order = 2)
 	@ApiOperation(value = "分页", notes = "传入notice")
-	public R<IPage<NoticeVO>> list(@ApiIgnore @RequestParam Map<String, Object> notice, Query query) {
+	public CommonResult<IPage<NoticeVO>> list(@ApiIgnore @RequestParam Map<String, Object> notice, Query query) {
 		IPage<Notice> pages = noticeService.page(Condition.getPage(query), Condition.getQueryWrapper(notice, Notice.class));
-		return R.data(NoticeWrapper.build().pageVO(pages));
+		return CommonResult.data(NoticeWrapper.build().pageVO(pages));
 	}
 
 	/**
@@ -83,8 +83,8 @@ public class NoticeController extends BladeController implements CacheNames {
 	@PostMapping("/save")
 	@ApiOperationSupport(order = 3)
 	@ApiOperation(value = "新增", notes = "传入notice")
-	public R save(@RequestBody Notice notice) {
-		return R.status(noticeService.save(notice));
+	public CommonResult save(@RequestBody Notice notice) {
+		return CommonResult.status(noticeService.save(notice));
 	}
 
 	/**
@@ -93,8 +93,8 @@ public class NoticeController extends BladeController implements CacheNames {
 	@PostMapping("/update")
 	@ApiOperationSupport(order = 4)
 	@ApiOperation(value = "修改", notes = "传入notice")
-	public R update(@RequestBody Notice notice) {
-		return R.status(noticeService.updateById(notice));
+	public CommonResult update(@RequestBody Notice notice) {
+		return CommonResult.status(noticeService.updateById(notice));
 	}
 
 	/**
@@ -103,8 +103,8 @@ public class NoticeController extends BladeController implements CacheNames {
 	@PostMapping("/submit")
 	@ApiOperationSupport(order = 5)
 	@ApiOperation(value = "新增或修改", notes = "传入notice")
-	public R submit(@RequestBody Notice notice) {
-		return R.status(noticeService.saveOrUpdate(notice));
+	public CommonResult submit(@RequestBody Notice notice) {
+		return CommonResult.status(noticeService.saveOrUpdate(notice));
 	}
 
 	/**
@@ -113,9 +113,9 @@ public class NoticeController extends BladeController implements CacheNames {
 	@PostMapping("/remove")
 	@ApiOperationSupport(order = 6)
 	@ApiOperation(value = "逻辑删除", notes = "传入notice")
-	public R remove(@ApiParam(value = "主键集合") @RequestParam String ids) {
+	public CommonResult remove(@ApiParam(value = "主键集合") @RequestParam String ids) {
 		boolean temp = noticeService.deleteLogic(Func.toLongList(ids));
-		return R.status(temp);
+		return CommonResult.status(temp);
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class NoticeController extends BladeController implements CacheNames {
 	@GetMapping("/notices")
 	@ApiOperationSupport(order = 7)
 	@ApiOperation(value = "消息", notes = "消息")
-	public R notices() {
+	public CommonResult notices() {
 		List<Map<String, String>> list = new ArrayList<>();
 		Map<String, String> map1 = new HashMap<>(16);
 		map1.put("logo", "https://spring.io/img/homepage/icon-spring-framework.svg");
@@ -176,7 +176,7 @@ public class NoticeController extends BladeController implements CacheNames {
 		map6.put("href", "https://pro.ant.design");
 		list.add(map6);
 
-		return R.data(list);
+		return CommonResult.data(list);
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class NoticeController extends BladeController implements CacheNames {
 	 */
 	@GetMapping("/my-notices")
 	@ApiOperation(value = "消息", notes = "消息")
-	public R myNotices() {
+	public CommonResult myNotices() {
 		List<Map<String, String>> list = new ArrayList<>();
 		Map<String, String> map1 = new HashMap<>(16);
 		map1.put("id", "000000001");
@@ -236,7 +236,7 @@ public class NoticeController extends BladeController implements CacheNames {
 		map5.put("type", "event");
 		list.add(map5);
 
-		return R.data(list);
+		return CommonResult.data(list);
 	}
 
 }

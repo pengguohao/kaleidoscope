@@ -15,7 +15,7 @@
  */
 package org.springblade.system.service.impl;
 
-import org.springblade.core.mp.base.BaseServiceImpl;
+import com.pgh.kaleidoscope.core.mp.base.BaseServiceImpl;
 import org.springblade.system.entity.AuthClient;
 import org.springblade.system.mapper.AuthClientMapper;
 import org.springblade.system.service.IAuthClientService;

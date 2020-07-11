@@ -16,7 +16,7 @@
 package org.springblade.gateway.props;
 
 import lombok.Data;
-import org.springblade.core.launch.constant.AppConstant;
+import com.pgh.kaleidoscope.core.launch.constant.AppConstant;
 
 /**
  * Swagger聚合文档属性

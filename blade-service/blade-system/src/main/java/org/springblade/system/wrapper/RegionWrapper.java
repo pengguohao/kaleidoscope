@@ -15,11 +15,11 @@
  */
 package org.springblade.system.wrapper;
 
-import org.springblade.core.mp.support.BaseEntityWrapper;
-import org.springblade.core.tool.node.ForestNodeMerger;
-import org.springblade.core.tool.node.INode;
-import org.springblade.core.tool.utils.BeanUtil;
-import org.springblade.core.tool.utils.SpringUtil;
+import com.pgh.kaleidoscope.core.mp.support.BaseEntityWrapper;
+import com.pgh.kaleidoscope.core.tool.node.ForestNodeMerger;
+import com.pgh.kaleidoscope.core.tool.node.INode;
+import com.pgh.kaleidoscope.core.tool.utils.BeanUtil;
+import com.pgh.kaleidoscope.core.tool.utils.SpringUtil;
 import org.springblade.system.entity.Region;
 import org.springblade.system.service.IRegionService;
 import org.springblade.system.vo.RegionVO;

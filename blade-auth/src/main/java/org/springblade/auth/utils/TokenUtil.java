@@ -15,11 +15,11 @@
  */
 package org.springblade.auth.utils;
 
-import org.springblade.core.launch.constant.TokenConstant;
-import org.springblade.core.secure.AuthInfo;
-import org.springblade.core.secure.TokenInfo;
-import org.springblade.core.secure.utils.SecureUtil;
-import org.springblade.core.tool.utils.Func;
+import com.pgh.kaleidoscope.core.launch.constant.TokenConstant;
+import com.pgh.kaleidoscope.core.secure.AuthInfo;
+import com.pgh.kaleidoscope.core.secure.TokenInfo;
+import com.pgh.kaleidoscope.core.secure.utils.SecureUtil;
+import com.pgh.kaleidoscope.core.tool.utils.Func;
 import org.springblade.system.user.entity.User;
 import org.springblade.system.user.entity.UserInfo;
 

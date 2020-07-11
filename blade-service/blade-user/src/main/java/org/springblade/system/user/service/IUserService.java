@@ -18,7 +18,7 @@ package org.springblade.system.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.springblade.core.mp.base.BaseService;
+import com.pgh.kaleidoscope.core.mp.base.BaseService;
 import org.springblade.system.user.entity.User;
 import org.springblade.system.user.entity.UserInfo;
 import org.springblade.system.user.excel.UserExcel;

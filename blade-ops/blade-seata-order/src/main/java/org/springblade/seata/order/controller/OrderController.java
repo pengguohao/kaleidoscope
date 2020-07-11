@@ -1,7 +1,7 @@
 package org.springblade.seata.order.controller;
 
 import lombok.AllArgsConstructor;
-import org.springblade.core.tool.api.R;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springblade.seata.order.service.IOrderService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +27,8 @@ public class OrderController {
 	 * @return boolean
 	 */
 	@RequestMapping("/create")
-	public R createOrder(String userId, String commodityCode, Integer count) {
-		return R.status(orderService.createOrder(userId, commodityCode, count));
+	public CommonResult createOrder(String userId, String commodityCode, Integer count) {
+		return CommonResult.status(orderService.createOrder(userId, commodityCode, count));
 	}
 
 }

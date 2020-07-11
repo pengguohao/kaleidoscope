@@ -17,8 +17,8 @@ package org.springblade.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springblade.core.secure.BladeUser;
-import org.springblade.core.tool.support.Kv;
+import com.pgh.kaleidoscope.core.secure.KaleidoscopeUser;
+import com.pgh.kaleidoscope.core.tool.support.Kv;
 import org.springblade.system.entity.Menu;
 import org.springblade.system.vo.MenuVO;
 
@@ -69,7 +69,7 @@ public interface IMenuService extends IService<Menu> {
 	 * @param user
 	 * @return
 	 */
-	List<MenuVO> grantTree(BladeUser user);
+	List<MenuVO> grantTree(KaleidoscopeUser user);
 
 	/**
 	 * 默认选中节点
@@ -85,6 +85,6 @@ public interface IMenuService extends IService<Menu> {
 	 * @param user
 	 * @return
 	 */
-	List<Kv> authRoutes(BladeUser user);
+	List<Kv> authRoutes(KaleidoscopeUser user);
 
 }

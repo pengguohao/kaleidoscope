@@ -16,7 +16,7 @@
 package org.springblade.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.springblade.core.tool.node.INode;
+import com.pgh.kaleidoscope.core.tool.node.INode;
 import org.springblade.system.entity.Region;
 
 import java.util.List;

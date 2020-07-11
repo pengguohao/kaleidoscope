@@ -16,7 +16,7 @@
 package org.springblade.desk.feign;
 
 import lombok.AllArgsConstructor;
-import org.springblade.core.tool.api.R;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
 import org.springblade.desk.mapper.NoticeMapper;
 import org.springblade.desk.entity.Notice;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +39,8 @@ public class NoticeClient implements INoticeClient {
 
 	@Override
 	@GetMapping(API_PREFIX + "/top")
-	public R<List<Notice>> top(Integer number) {
-		return R.data(mapper.topList(number));
+	public CommonResult<List<Notice>> top(Integer number) {
+		return CommonResult.data(mapper.topList(number));
 	}
 
 }

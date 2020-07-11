@@ -15,8 +15,8 @@
  */
 package org.springblade.resource;
 
-import org.springblade.core.launch.BladeApplication;
-import org.springblade.core.launch.constant.AppConstant;
+import com.pgh.kaleidoscope.core.launch.KaleidoscopeApplication;
+import com.pgh.kaleidoscope.core.launch.constant.AppConstant;
 import org.springframework.cloud.client.SpringCloudApplication;
 
 /**
@@ -28,7 +28,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 public class ResourceApplication {
 
 	public static void main(String[] args) {
-		BladeApplication.run(AppConstant.APPLICATION_RESOURCE_NAME, ResourceApplication.class, args);
+		KaleidoscopeApplication.run(AppConstant.APPLICATION_RESOURCE_NAME, ResourceApplication.class, args);
 	}
 
 }
