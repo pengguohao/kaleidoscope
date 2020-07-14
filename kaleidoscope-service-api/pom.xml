@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.pgh</groupId>
+        <artifactId>kaleidoscope</artifactId>
+        <version>2.7.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>kaleidoscope-service-api</artifactId>
+    <name>${project.artifactId}</name>
+    <version>2.7.1</version>
+    <packaging>pom</packaging>
+    <description>SpringBlade 微服务API集合</description>
+
+    <modules>
+        <module>kaleidoscope-desk-api</module>
+        <module>kaleidoscope-dict-api</module>
+        <module>kaleidoscope-system-api</module>
+        <module>kaleidoscope-user-api</module>
+        <module>kaleidoscope-demo-api</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.pgh</groupId>
+            <artifactId>kaleidoscope-core-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pgh</groupId>
+            <artifactId>kaleidoscope-core-tool</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.pgh</groupId>
+            <artifactId>kaleidoscope-core-launch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-models</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.dreamlu</groupId>
+            <artifactId>mica-auto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                    <finalName>${project.name}</finalName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${docker.plugin.version}</version>
+                <configuration>
+                    <skipDockerBuild>true</skipDockerBuild>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
