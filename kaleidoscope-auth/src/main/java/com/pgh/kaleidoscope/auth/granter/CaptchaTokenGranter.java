@@ -1,30 +1,14 @@
-/*
- *      Copyright (c) 2018-2028, Chill Zhuang All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without
- *  modification, are permitted provided that the following conditions are met:
- *
- *  Redistributions of source code must retain the above copyright notice,
- *  this list of conditions and the following disclaimer.
- *  Redistributions in binary form must reproduce the above copyright
- *  notice, this list of conditions and the following disclaimer in the
- *  documentation and/or other materials provided with the distribution.
- *  Neither the name of the dreamlu.net developer nor the names of its
- *  contributors may be used to endorse or promote products derived from
- *  this software without specific prior written permission.
- *  Author: Chill 庄骞 (smallchill@163.com)
- */
 package com.pgh.kaleidoscope.auth.granter;
 
-import com.pgh.kaleidoscope.auth.enums.BladeUserEnum;
 import com.pgh.kaleidoscope.auth.utils.TokenUtil;
-import com.pgh.kaleidoscope.core.tool.utils.*;
-import lombok.AllArgsConstructor;
 import com.pgh.kaleidoscope.common.cache.CacheNames;
 import com.pgh.kaleidoscope.core.log.exception.ServiceException;
-import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.utils.RedisUtil;
+import com.pgh.kaleidoscope.core.tool.utils.StringUtil;
+import com.pgh.kaleidoscope.core.tool.utils.WebUtil;
 import com.pgh.kaleidoscope.system.user.entity.UserInfo;
 import com.pgh.kaleidoscope.system.user.feign.IUserClient;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,25 +40,7 @@ public class CaptchaTokenGranter implements ITokenGranter {
 			throw new ServiceException(TokenUtil.CAPTCHA_NOT_CORRECT);
 		}
 
-		String tenantId = tokenParameter.getArgs().getStr("tenantId");
-		String account = tokenParameter.getArgs().getStr("account");
-		String password = tokenParameter.getArgs().getStr("password");
-		UserInfo userInfo = null;
-		if (Func.isNoneBlank(account, password)) {
-			// 获取用户类型
-			String userType = tokenParameter.getArgs().getStr("userType");
-			CommonResult<UserInfo> result;
-			// 根据不同用户类型调用对应的接口返回数据，用户可自行拓展
-			if (userType.equals(BladeUserEnum.WEB.getName())) {
-				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));
-			} else if (userType.equals(BladeUserEnum.APP.getName())) {
-				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));
-			} else {
-				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));
-			}
-			userInfo = result.isSuccess() ? result.getData() : null;
-		}
-		return userInfo;
+		return TokenUtil.parseTokenParam(userClient, tokenParameter);
 	}
 
 }

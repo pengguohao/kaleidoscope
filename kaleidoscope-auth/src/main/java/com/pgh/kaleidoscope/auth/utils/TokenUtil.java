@@ -1,27 +1,17 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.pgh.kaleidoscope.auth.utils;
 
+import com.pgh.kaleidoscope.auth.enums.KaleidoscopeUserEnum;
+import com.pgh.kaleidoscope.auth.granter.TokenParameter;
 import com.pgh.kaleidoscope.core.launch.constant.TokenConstant;
 import com.pgh.kaleidoscope.core.secure.AuthInfo;
 import com.pgh.kaleidoscope.core.secure.TokenInfo;
 import com.pgh.kaleidoscope.core.secure.utils.SecureUtil;
+import com.pgh.kaleidoscope.core.tool.api.CommonResult;
+import com.pgh.kaleidoscope.core.tool.utils.DigestUtil;
 import com.pgh.kaleidoscope.core.tool.utils.Func;
 import com.pgh.kaleidoscope.system.user.entity.User;
 import com.pgh.kaleidoscope.system.user.entity.UserInfo;
+import com.pgh.kaleidoscope.system.user.feign.IUserClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,6 +80,36 @@ public class TokenUtil {
 		param.put(TokenConstant.TOKEN_TYPE, TokenConstant.REFRESH_TOKEN);
 		param.put(TokenConstant.USER_ID, Func.toStr(user.getId()));
 		return SecureUtil.createJWT(param, "audience", "issuser", TokenConstant.REFRESH_TOKEN);
+	}
+
+	/**
+	 * 解析和校验用户的账号密码
+	 *
+	 * @param userClient
+	 * @param tokenParameter
+	 * @return
+	 */
+	public static UserInfo parseTokenParam(IUserClient userClient, TokenParameter tokenParameter) {
+		String tenantId = tokenParameter.getArgs().getStr("tenantId");
+		String account = tokenParameter.getArgs().getStr("account");
+		String password = tokenParameter.getArgs().getStr("password");
+
+		if (Func.isNoneBlank(account, password)) {
+			// 获取用户类型
+			String userType = tokenParameter.getArgs().getStr("userType");
+			CommonResult<UserInfo> result;
+			// 根据不同用户类型调用对应的接口返回数据，用户可自行拓展
+			if (userType.equals(KaleidoscopeUserEnum.WEB.getName())) {
+				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));
+			} else if (userType.equals(KaleidoscopeUserEnum.APP.getName())) {
+				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));
+			} else {
+				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));
+			}
+			return result.isSuccess() ? result.getData() : null;
+		}
+
+		return null;
 	}
 
 }
