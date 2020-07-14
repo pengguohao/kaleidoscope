@@ -32,7 +32,7 @@ import com.pgh.kaleidoscope.core.mp.base.BaseEntity;
  * @author Chill
  */
 @Data
-@TableName("blade_datasource")
+@TableName("kaleidos_datasource")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "Datasource对象", description = "数据源配置表")
 public class Datasource extends BaseEntity {

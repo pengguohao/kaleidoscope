@@ -28,7 +28,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		KaleidoscopeApplication.run("blade-demo", DemoApplication.class, args);
+		KaleidoscopeApplication.run("kaleidoscope-demo", DemoApplication.class, args);
 	}
 
 }

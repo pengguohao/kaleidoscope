@@ -34,7 +34,7 @@ import java.util.Date;
  * @author Chill
  */
 @Data
-@TableName("blade_notice")
+@TableName("kaleidos_notice")
 @EqualsAndHashCode(callSuper = true)
 public class Notice extends BaseEntity {
 

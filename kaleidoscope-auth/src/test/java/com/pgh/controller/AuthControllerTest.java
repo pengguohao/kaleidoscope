@@ -13,10 +13,10 @@ public class AuthControllerTest {
 	public void testStringUtil(){
 		System.out.println(Func.isNoneBlank(" ", "123"));
 		System.out.println(Func.isNoneBlank("", "123"));
-		System.out.println(Func.isNoneBlank("123", ""));
+		System.out.println(Func.isNoneBlank("123", "1","asd"));
 		System.out.println(Func.isNoneBlank("123", " "));
 		System.out.println(Func.isNoneBlank(" ", ""));
-		System.out.println(Func.isNoneBlank("", ""));
-		System.out.println(Func.isNoneBlank("zxc", "123"));
+		System.out.println(Func.isNoneBlank("", "",""));
+		System.out.println(Func.isNoneBlank("zxc", "123","  "));
 	}
 }

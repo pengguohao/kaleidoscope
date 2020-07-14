@@ -1,6 +1,6 @@
 package com.pgh.kaleidoscope.auth.utils;
 
-import com.pgh.kaleidoscope.auth.enums.KaleidoscopeUserEnum;
+import com.pgh.kaleidoscope.auth.enums.KaleidosUserEnum;
 import com.pgh.kaleidoscope.auth.granter.TokenParameter;
 import com.pgh.kaleidoscope.core.launch.constant.TokenConstant;
 import com.pgh.kaleidoscope.core.secure.AuthInfo;
@@ -99,9 +99,9 @@ public class TokenUtil {
 			String userType = tokenParameter.getArgs().getStr("userType");
 			CommonResult<UserInfo> result;
 			// 根据不同用户类型调用对应的接口返回数据，用户可自行拓展
-			if (userType.equals(KaleidoscopeUserEnum.WEB.getName())) {
+			if (userType.equals(KaleidosUserEnum.WEB.getName())) {
 				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));
-			} else if (userType.equals(KaleidoscopeUserEnum.APP.getName())) {
+			} else if (userType.equals(KaleidosUserEnum.APP.getName())) {
 				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));
 			} else {
 				result = userClient.userInfo(tenantId, account, DigestUtil.encrypt(password));

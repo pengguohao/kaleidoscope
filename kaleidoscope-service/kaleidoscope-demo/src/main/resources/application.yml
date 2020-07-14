@@ -7,6 +7,6 @@ mybatis-plus:
 #swagger扫描路径配置
 swagger:
   base-packages:
-    - org.springbalde
+    - com.pgh.kaleidoscope
     - com.example
 

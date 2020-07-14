@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum KaleidoscopeUserEnum {
+public enum KaleidosUserEnum {
 
 	/**
 	 * web
