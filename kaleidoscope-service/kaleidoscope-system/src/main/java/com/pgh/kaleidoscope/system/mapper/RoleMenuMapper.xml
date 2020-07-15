@@ -16,7 +16,7 @@
     </sql>
 
     <select id="selectRoleMenuPage" resultMap="roleMenuResultMap">
-        select * from blade_role_menu where is_deleted = 0
+        select * from kaleidos_role_menu where is_deleted = 0
     </select>
 
 </mapper>

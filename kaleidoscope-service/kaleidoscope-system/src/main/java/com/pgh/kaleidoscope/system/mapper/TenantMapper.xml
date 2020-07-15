@@ -19,7 +19,7 @@
 
 
     <select id="selectTenantPage" resultMap="tenantResultMap">
-        select * from blade_tenant where is_deleted = 0
+        select * from kaleidos_tenant where is_deleted = 0
     </select>
 
 </mapper>

@@ -29,11 +29,11 @@
     </sql>
 
     <select id="topList" resultMap="noticeResultMap">
-        select * from blade_notice limit #{number}
+        select * from kaleidos_notice limit #{number}
     </select>
 
     <select id="selectNoticePage" resultMap="noticeResultMap">
-        select * from blade_notice where title like concat('%', #{notice.title}, '%') and is_deleted = 0
+        select * from kaleidos_notice where title like concat('%', #{notice.title}, '%') and is_deleted = 0
     </select>
 
 </mapper>

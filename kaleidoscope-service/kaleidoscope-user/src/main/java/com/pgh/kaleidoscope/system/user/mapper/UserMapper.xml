@@ -38,14 +38,14 @@
     </sql>
 
     <select id="selectUserPage" resultMap="userResultMap">
-        select * from blade_user where is_deleted = 0
+        select * from kaleidos_user where is_deleted = 0
     </select>
 
     <select id="getUser" resultMap="userResultMap">
         SELECT
             *
         FROM
-            blade_user
+            kaleidos_user
         WHERE
             tenant_id = #{param1} and account = #{param2} and password = #{param3} and is_deleted = 0
     </select>
@@ -54,7 +54,7 @@
         SELECT
         role_name
         FROM
-        blade_role
+        kaleidos_role
         WHERE
         id IN
         <foreach collection="array" item="ids" index="index" open="(" close=")" separator=",">
@@ -67,7 +67,7 @@
         SELECT
             role_alias
         FROM
-            blade_role
+        kaleidos_role
         WHERE
             id IN
         <foreach collection="array" item="ids" index="index" open="(" close=")" separator=",">
@@ -80,7 +80,7 @@
         SELECT
             dept_name
         FROM
-            blade_dept
+        kaleidos_dept
         WHERE
             id IN
         <foreach collection="array" item="ids" index="index" open="(" close=")" separator=",">
@@ -90,7 +90,7 @@
     </select>
 
     <select id="exportUser" resultType="com.pgh.kaleidoscope.system.user.excel.UserExcel">
-        SELECT id, tenant_id, account, name, real_name, email, phone, birthday, role_id, dept_id, post_id FROM blade_user ${ew.customSqlSegment}
+        SELECT id, tenant_id, account, name, real_name, email, phone, birthday, role_id, dept_id, post_id FROM kaleidos_user ${ew.customSqlSegment}
     </select>
 
 </mapper>

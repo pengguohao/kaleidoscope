@@ -58,9 +58,9 @@
     <select id="lazyList" resultMap="regionVOResultMap">
         SELECT
             region.*,
-            ( SELECT CASE WHEN count( 1 ) > 0 THEN 1 ELSE 0 END FROM blade_region WHERE parent_code = region.code ) AS "has_children"
+            ( SELECT CASE WHEN count( 1 ) > 0 THEN 1 ELSE 0 END FROM kaleidos_region WHERE parent_code = region.code ) AS "has_children"
         FROM
-            blade_region region
+            kaleidos_region region
         <where>
             <if test="param1!=null">
                 and region.parent_code = #{param1}
@@ -81,9 +81,9 @@
             region.name AS "title",
             region.code AS "value",
             region.code AS "key",
-            ( SELECT CASE WHEN count( 1 ) > 0 THEN 1 ELSE 0 END FROM blade_region WHERE parent_code = region.code ) AS "has_children"
+            ( SELECT CASE WHEN count( 1 ) > 0 THEN 1 ELSE 0 END FROM kaleidos_region WHERE parent_code = region.code ) AS "has_children"
         FROM
-            blade_region region
+            kaleidos_region region
         <where>
             <if test="param1!=null">
                 and region.parent_code = #{param1}
