@@ -33,7 +33,7 @@ import java.util.Date;
  * @author Chill
  */
 @Data
-@TableName("blade_user")
+@TableName("kaleidos_user")
 @EqualsAndHashCode(callSuper = true)
 public class User extends TenantEntity {
 

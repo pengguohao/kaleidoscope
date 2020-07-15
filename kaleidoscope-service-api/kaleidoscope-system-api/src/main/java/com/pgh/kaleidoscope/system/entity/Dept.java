@@ -33,7 +33,7 @@ import java.io.Serializable;
  * @author Chill
  */
 @Data
-@TableName("blade_dept")
+@TableName("kaleidos_dept")
 @ApiModel(value = "Dept对象", description = "Dept对象")
 public class Dept implements Serializable {
 

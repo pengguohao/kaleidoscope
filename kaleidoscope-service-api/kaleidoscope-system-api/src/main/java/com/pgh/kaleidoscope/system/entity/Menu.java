@@ -34,7 +34,7 @@ import java.io.Serializable;
  * @author Chill
  */
 @Data
-@TableName("blade_menu")
+@TableName("kaleidos_menu")
 @ApiModel(value = "Menu对象", description = "Menu对象")
 public class Menu implements Serializable {
 

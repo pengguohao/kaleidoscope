@@ -32,7 +32,7 @@ import com.pgh.kaleidoscope.core.mp.base.BaseEntity;
  * @author Chill
  */
 @Data
-@TableName("blade_tenant")
+@TableName("kaleidos_tenant")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "Tenant对象", description = "Tenant对象")
 public class Tenant extends BaseEntity {

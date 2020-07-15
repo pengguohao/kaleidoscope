@@ -31,7 +31,7 @@ import java.io.Serializable;
  * @author Chill
  */
 @Data
-@TableName("blade_region")
+@TableName("kaleidos_region")
 @ApiModel(value = "Region对象", description = "行政区划表")
 public class Region implements Serializable {
 

@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties("blade.secure")
+@ConfigurationProperties("kaleidoscope.secure")
 public class AuthProperties {
 
 	/**

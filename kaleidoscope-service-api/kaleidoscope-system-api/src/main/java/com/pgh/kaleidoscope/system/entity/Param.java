@@ -32,7 +32,7 @@ import com.pgh.kaleidoscope.core.mp.base.BaseEntity;
  * @author Chill
  */
 @Data
-@TableName("blade_param")
+@TableName("kaleidos_param")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "Param对象", description = "Param对象")
 public class Param extends BaseEntity {

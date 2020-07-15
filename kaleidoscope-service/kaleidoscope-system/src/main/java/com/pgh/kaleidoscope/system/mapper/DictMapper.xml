@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.springblade.system.mapper.DictMapper">
+<mapper namespace="com.pgh.kaleidoscope.system.mapper.DictMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="dictResultMap" type="org.springblade.system.entity.Dict">
+    <resultMap id="dictResultMap" type="com.pgh.kaleidoscope.system.entity.Dict">
         <id column="id" property="id"/>
         <result column="parent_id" property="parentId"/>
         <result column="code" property="code"/>

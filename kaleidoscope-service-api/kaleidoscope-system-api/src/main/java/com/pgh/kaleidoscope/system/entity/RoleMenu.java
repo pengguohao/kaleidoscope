@@ -32,7 +32,7 @@ import java.io.Serializable;
  * @author Chill
  */
 @Data
-@TableName("blade_role_menu")
+@TableName("kaleidos_role_menu")
 @ApiModel(value = "RoleMenu对象", description = "RoleMenu对象")
 public class RoleMenu implements Serializable {
 

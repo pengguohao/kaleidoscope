@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.springblade.system.mapper.TenantMapper">
+<mapper namespace="com.pgh.kaleidoscope.system.mapper.TenantMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="tenantResultMap" type="org.springblade.system.entity.Tenant">
+    <resultMap id="tenantResultMap" type="com.pgh.kaleidoscope.system.entity.Tenant">
         <result column="id" property="id"/>
         <result column="create_user" property="createUser"/>
         <result column="create_time" property="createTime"/>

@@ -32,7 +32,7 @@ import com.pgh.kaleidoscope.core.mp.base.TenantEntity;
  * @author Chill
  */
 @Data
-@TableName("blade_post")
+@TableName("kaleidos_post")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "Post对象", description = "岗位表")
 public class Post extends TenantEntity {

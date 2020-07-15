@@ -34,7 +34,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("blade_notice")
+@TableName("kaleidos_notice")
 public class Notice extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;

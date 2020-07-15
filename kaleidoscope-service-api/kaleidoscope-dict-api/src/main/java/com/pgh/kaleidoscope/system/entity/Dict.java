@@ -34,7 +34,7 @@ import java.io.Serializable;
  * @since 2018-12-24
  */
 @Data
-@TableName("blade_dict")
+@TableName("kaleidos_dict")
 @ApiModel(value = "Dict对象", description = "Dict对象")
 public class Dict implements Serializable {
 

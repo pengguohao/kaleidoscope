@@ -33,7 +33,7 @@ import com.pgh.kaleidoscope.core.mp.base.BaseEntity;
  * @since 2019-03-24
  */
 @Data
-@TableName("blade_client")
+@TableName("kaleidos_client")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "Client对象", description = "Client对象")
 public class AuthClient extends BaseEntity {
