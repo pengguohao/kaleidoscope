@@ -18,7 +18,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for kaleidostenant
 -- ----------------------------
-DROP TABLE IF EXISTS `kaleidostenant`;
+DROP TABLE IF EXISTS `kaleidos_tenant`;
 CREATE TABLE `kaleidostenant` (
   `id` bigint(64) NOT NULL COMMENT '主键',
   `tenant_id` varchar(12) NOT NULL COMMENT '租户ID',
