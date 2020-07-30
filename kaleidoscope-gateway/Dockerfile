@@ -1,10 +1,8 @@
 FROM anapsix/alpine-java:8_server-jre_unlimited
 
-MAINTAINER smallchill@163.com
+RUN mkdir -p /kaleidoscope/gateway
 
-RUN mkdir -p /blade/gateway
-
-WORKDIR /blade/gateway
+WORKDIR /kaleidoscope/gateway
 
 EXPOSE 80
 

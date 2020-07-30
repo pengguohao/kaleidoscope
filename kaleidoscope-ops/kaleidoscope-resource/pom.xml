@@ -46,7 +46,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>${docker.plugin.version}</version>
                 <configuration>
-                    <imageName>${docker.registry.url}/blade/${project.artifactId}:${project.version}</imageName>
+                    <imageName>${docker.registry.url}/kaleidoscope/${project.artifactId}:${project.version}</imageName>
                     <dockerDirectory>${project.basedir}</dockerDirectory>
                     <dockerHost>${docker.registry.host}</dockerHost>
                     <resources>
@@ -57,7 +57,7 @@
                         </resource>
                     </resources>
                     <registryUrl>${docker.registry.url}</registryUrl>
-                    <serverId>${docker.registry.url}</serverId>
+                    <serverId>${docker.registry.serverId}</serverId>
                     <pushImage>true</pushImage>
                 </configuration>
             </plugin>
