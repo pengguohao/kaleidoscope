@@ -29,10 +29,9 @@
         <spring.cloud.version>Hoxton.SR5</spring.cloud.version>
         <spring.platform.version>Cairo-SR8</spring.platform.version>
 
-        <!-- 推荐使用Harbor -->
+        <!-- 推荐使用Harbor <docker.registry.host>http://${docker.registry.url}:2375</docker.registry.host> -->
         <docker.registry.url>registry.cn-shenzhen.aliyuncs.com/penggh</docker.registry.url>
         <docker.registry.serverId>docker-aliyun</docker.registry.serverId>
-        <docker.registry.host>http://${docker.registry.url}:2375</docker.registry.host>
         <docker.plugin.version>1.0.0</docker.plugin.version>
     </properties>
 

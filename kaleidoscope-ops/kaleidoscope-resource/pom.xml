@@ -48,7 +48,7 @@
                 <configuration>
                     <imageName>${docker.registry.url}/kaleidoscope/${project.artifactId}:${project.version}</imageName>
                     <dockerDirectory>${project.basedir}</dockerDirectory>
-                    <dockerHost>${docker.registry.host}</dockerHost>
+                    <!--<dockerHost>${docker.registry.host}</dockerHost>-->
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
