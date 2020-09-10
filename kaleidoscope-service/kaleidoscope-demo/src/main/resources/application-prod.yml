@@ -5,9 +5,9 @@ server:
 #数据源配置
 #spring:
 #  datasource:
-#    url: ${blade.datasource.prod.url}
-#    username: ${blade.datasource.prod.username}
-#    password: ${blade.datasource.prod.password}
+#    url: ${blade.datasource.dev.url}
+#    username: ${blade.datasource.dev.username}
+#    password: ${blade.datasource.dev.password}
 
 spring:
   #排除DruidDataSourceAutoConfigure
@@ -19,10 +19,13 @@ spring:
       primary: master
       datasource:
         master:
-          url: ${blade.datasource.demo.master.url}
-          username: ${blade.datasource.demo.master.username}
-          password: ${blade.datasource.demo.master.password}
+          url: ${kaleidoscope.datasource.dev.url}
+          username: ${kaleidoscope.datasource.dev.username}
+          password: ${kaleidoscope.datasource.dev.password}
         slave:
-          url: ${blade.datasource.demo.slave.url}
-          username: ${blade.datasource.demo.slave.username}
-          password: ${blade.datasource.demo.slave.password}
+          url: ${kaleidoscope.datasource.dev.url}
+          username: ${kaleidoscope.datasource.dev.username}
+          password: ${kaleidoscope.datasource.dev.password}
+
+demo:
+  name: "kaleiscopeDemoName"

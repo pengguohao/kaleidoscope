@@ -6,6 +6,6 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${blade.datasource.test.url}
-    username: ${blade.datasource.test.username}
-    password: ${blade.datasource.test.password}
+    url: ${kaleidoscope.datasource.dev.url}
+    username: ${kaleidoscope.datasource.dev.username}
+    password: ${kaleidoscope.datasource.dev.password}
