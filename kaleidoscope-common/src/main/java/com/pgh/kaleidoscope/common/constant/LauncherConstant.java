@@ -15,6 +15,11 @@ public interface LauncherConstant {
 	String NACOS_NAMESPACE = "f447a694-519a-4255-95f9-bcbb5a5d636";
 
 	/**
+	 * nacos地址key
+	 */
+	String NACOS_ADDR_KEY = "spring.cloud.nacos.discovery.server-addr";
+
+	/**
 	 * nacos dev 地址
 	 */
 	String NACOS_DEV_ADDR = "127.0.0.1:8848";

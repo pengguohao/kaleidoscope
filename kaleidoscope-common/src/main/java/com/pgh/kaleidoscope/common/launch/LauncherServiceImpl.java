@@ -18,6 +18,7 @@ package com.pgh.kaleidoscope.common.launch;
 import com.pgh.kaleidoscope.common.constant.LauncherConstant;
 import com.pgh.kaleidoscope.core.launch.service.LauncherService;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.util.StringUtils;
 
 import java.util.Properties;
 
@@ -31,8 +32,14 @@ public class LauncherServiceImpl implements LauncherService {
 	@Override
 	public void launcher(SpringApplicationBuilder builder, String appName, String profile) {
 		Properties props = System.getProperties();
-		props.setProperty("spring.cloud.nacos.discovery.server-addr", LauncherConstant.nacosAddr(profile));
-		props.setProperty("spring.cloud.nacos.config.server-addr", LauncherConstant.nacosAddr(profile));
+		String nacosAddr = System.getProperty("nacosAddr");
+		if (StringUtils.hasText(nacosAddr)){
+			props.setProperty(LauncherConstant.NACOS_ADDR_KEY, nacosAddr);
+			props.setProperty(LauncherConstant.NACOS_ADDR_KEY, nacosAddr);
+		}else {
+			props.setProperty(LauncherConstant.NACOS_ADDR_KEY, LauncherConstant.nacosAddr(profile));
+			props.setProperty(LauncherConstant.NACOS_ADDR_KEY, LauncherConstant.nacosAddr(profile));
+		}
 		props.setProperty("spring.cloud.sentinel.transport.dashboard", LauncherConstant.sentinelAddr(profile));
 		props.setProperty("spring.zipkin.base-url", LauncherConstant.zipkinAddr(profile));
 	}
