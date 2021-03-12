@@ -1,0 +1,9 @@
+2021-03-11 09:34:25,087|11|true|192.168.0.126|publish|kaleidoscope|DEFAULT_GROUP||c545c94c2156630caec1d0aa126cdfda|null
+2021-03-11 09:34:53,149|5|true|192.168.0.126|publish|kaleidoscope-dev|DEFAULT_GROUP||1394f56e66adcfc01975bda0d1ba80c1|null
+2021-03-11 09:34:58,629|7|true|192.168.0.126|remove|kaleidos-dev|DEFAULT_GROUP||null|null
+2021-03-11 09:35:02,062|5|true|192.168.0.126|remove|kaleidos|DEFAULT_GROUP||null|null
+2021-03-11 09:56:40,634|27|true|192.168.0.126|publish|kaleidoscope-dev.yaml|DEFAULT_GROUP||6512bd43d9caa6e02c990b0a82652dca|null
+2021-03-11 09:56:55,858|110|true|192.168.0.126|publish|kaleidoscope-dev.yaml|DEFAULT_GROUP||9e3f4fdc114c9d3219c538e1a4f15141|null
+2021-03-11 10:35:35,111|43|true|172.21.0.5|publish|kaleidoscope|DEFAULT_GROUP||6c986635e1136bfa78232e9085f0ccc7|null
+2021-03-11 10:36:02,361|8|true|172.21.0.5|publish|kaleidoscope-dev|DEFAULT_GROUP||1394f56e66adcfc01975bda0d1ba80c1|null
+2021-03-11 10:43:28,271|14|true|172.21.0.5|publish|kaleidoscope|DEFAULT_GROUP||1ca1bdfea3bdc90257710e283b00831f|null

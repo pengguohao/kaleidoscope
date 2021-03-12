@@ -1,0 +1,30 @@
+2021-03-11 09:53:39,154 WARN [master-db] jdbc:mysql://mysql:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+
+2021-03-11 09:53:40,435 WARN isQuickStart:false
+
+2021-03-11 10:02:18,610 WARN [master-db] jdbc:mysql://mysql:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+
+2021-03-11 10:02:19,797 WARN isQuickStart:false
+
+2021-03-11 10:05:57,391 WARN [master-db] jdbc:mysql://mysql:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+
+2021-03-11 10:05:58,606 WARN isQuickStart:false
+
+2021-03-11 10:19:52,197 WARN [master-db] jdbc:mysql://mysql:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+
+2021-03-11 10:19:52,550 WARN useAddressServer:true
+
+2021-03-11 10:19:52,698 WARN isQuickStart:false
+
+2021-03-11 10:29:52,536 ERROR [db-error] master db  down.
+
+2021-03-11 10:29:52,538 ERROR [master-db] master db not found.
+
+2021-03-11 10:30:02,543 ERROR [db-error] master db  down.
+
+2021-03-11 10:30:02,544 ERROR [master-db] master db not found.
+
+2021-03-11 10:33:34,947 WARN [master-db] jdbc:mysql://mysql:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+
+2021-03-11 10:33:36,065 WARN isQuickStart:false
+
