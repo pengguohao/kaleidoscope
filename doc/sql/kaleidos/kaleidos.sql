@@ -19,7 +19,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for kaleidostenant
 -- ----------------------------
 DROP TABLE IF EXISTS `kaleidos_tenant`;
-CREATE TABLE `kaleidostenant` (
+CREATE TABLE `kaleidos_tenant` (
   `id` bigint(64) NOT NULL COMMENT '主键',
   `tenant_id` varchar(12) NOT NULL COMMENT '租户ID',
   `tenant_name` varchar(50) NOT NULL COMMENT '租户名称',
@@ -38,7 +38,7 @@ CREATE TABLE `kaleidostenant` (
 -- ----------------------------
 -- Records of kaleidostenant
 -- ----------------------------
-INSERT INTO `kaleidostenant` VALUES ('1123598820738675201', '000000', '管理组', 'admin', '666666', '管理组', '1123598821738675201', '2019-01-01 00:00:39', '1123598821738675201', '2019-01-01 00:00:39', '1', '0');
+INSERT INTO `kaleidos_tenant` VALUES ('1123598820738675201', '000000', '管理组', 'admin', '666666', '管理组', '1123598821738675201', '2019-01-01 00:00:39', '1123598821738675201', '2019-01-01 00:00:39', '1', '0');
 
 -- ----------------------------
 -- Table structure for kaleidos_client
